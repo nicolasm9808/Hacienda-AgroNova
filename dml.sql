@@ -1,3 +1,585 @@
+-- Inserciones para la tabla Especies
+INSERT INTO Especies (id_especie, especie) VALUES
+(1, 'Vaca'),
+(2, 'Cabra'),
+(3, 'Oveja'),
+(4, 'Cerdo'),
+(5, 'Gallina'),
+(6, 'Pato'),
+(7, 'Ostras'),
+(8, 'Pavo'),
+(9, 'Caballo'),
+(10, 'Conejo');
+
+-- Inserciones para la tabla Estados_animales
+INSERT INTO Estados_animales (id_estado_animal, estado) VALUES
+(1, 'Saludable'),
+(2, 'Enfermo'),
+(3, 'En tratamiento'),
+(4, 'Recuperándose');
+
+-- Inserciones para la tabla Animales
+INSERT INTO Animales (id_animal, id_especie, edad, id_estado_animal) VALUES
+(1, 1, 5, 1),  -- Vaca 1
+(2, 1, 3, 1),  -- Vaca 2
+(3, 1, 4, 2),  -- Vaca 3
+(4, 2, 2, 1),  -- Cabra 1
+(5, 2, 1, 1),  -- Cabra 2
+(6, 3, 2, 1),  -- Oveja 1
+(7, 3, 3, 1),  -- Oveja 2
+(8, 4, 2, 1),  -- Cerdo 1
+(9, 4, 4, 1),  -- Cerdo 2
+(10, 5, 1, 1), -- Gallina 1
+(11, 5, 1, 1), -- Gallina 2
+(12, 5, 1, 1), -- Gallina 3
+(13, 6, 1, 1), -- Pato 1
+(14, 7, 1, 1), -- Ostra 1
+(15, 8, 1, 1), -- Pavo 1
+(16, 9, 4, 1), -- Caballo 1
+(17, 10, 1, 1), -- Conejo 1
+(18, 10, 1, 1), -- Conejo 2
+(19, 1, 6, 1),  -- Vaca 4
+(20, 2, 3, 1),  -- Cabra 3
+(21, 3, 5, 2),  -- Oveja 3
+(22, 4, 2, 1),  -- Cerdo 3
+(23, 4, 3, 1),  -- Cerdo 4
+(24, 5, 1, 1), -- Gallina 4
+(25, 6, 2, 1), -- Pato 2
+(26, 1, 2, 1),  -- Vaca 5
+(27, 1, 3, 1),  -- Vaca 6
+(28, 2, 4, 1),  -- Cabra 4
+(29, 3, 1, 1),  -- Oveja 4
+(30, 4, 5, 1),  -- Cerdo 5
+(31, 5, 2, 1), -- Gallina 5
+(32, 2, 5, 1),  -- Cabra 5
+(33, 6, 1, 1), -- Pato 3
+(34, 7, 1, 1), -- Ostra 2
+(35, 8, 1, 1), -- Pavo 2
+(36, 9, 3, 1), -- Caballo 2
+(37, 10, 2, 1), -- Conejo 3
+(38, 1, 4, 2),  -- Vaca 7
+(39, 2, 2, 2),  -- Cabra 6
+(40, 3, 6, 1),  -- Oveja 5
+(41, 4, 4, 2),  -- Cerdo 6
+(42, 5, 3, 1), -- Gallina 6
+(43, 5, 2, 2), -- Gallina 7
+(44, 6, 3, 1), -- Pato 4
+(45, 7, 2, 1), -- Ostra 3
+(46, 8, 1, 2), -- Pavo 3
+(47, 9, 1, 1), -- Caballo 3
+(48, 10, 3, 1), -- Conejo 4
+(49, 2, 5, 1),  -- Cabra 7
+(50, 3, 4, 1);  -- Oveja 6
+
+-- Inserciones para la tabla Estado_cultivo
+INSERT INTO Estados_cultivo (id_estado_cultivo, estado) VALUES
+(1, 'Siembra'),
+(2, 'En espera'),
+(3, 'Cosechado'),
+(4, 'En crecimiento');
+
+-- Inserciones para la tabla Cultivos
+INSERT INTO Cultivos (id_cultivo, nombre, areas_hectareas, id_estado_cultivo, fecha_siembra) VALUES
+(1, 'Maíz', 10.00, 1, '2024-03-01'),
+(2, 'Frijol', 5.00, 1, '2024-03-05'),
+(3, 'Trigo', 7.00, 1, '2024-03-10'),
+(4, 'Aguacate', 3.50, 1, '2024-03-15'),
+(5, 'Sorgo', 4.00, 1, '2024-04-01'),
+(6, 'Cebolla', 2.50, 1, '2024-03-20'),
+(7, 'Papa', 6.00, 1, '2024-04-05'),
+(8, 'Zanahoria', 4.50, 1, '2024-04-10'),
+(9, 'Lechuga', 2.00, 1, '2024-04-15'),
+(10, 'Tomate', 3.00, 1, '2024-04-20'),
+(11, 'Pimiento', 2.50, 1, '2024-04-25'),
+(12, 'Espinaca', 1.50, 1, '2024-04-30'),
+(13, 'Cilantro', 1.00, 1, '2024-05-05'),
+(14, 'Frutilla', 2.00, 1, '2024-05-10'),
+(15, 'Melón', 3.50, 1, '2024-05-15'),
+(16, 'Sandía', 5.00, 1, '2024-05-20'),
+(17, 'Ajo', 1.00, 1, '2024-05-25'),
+(18, 'Albahaca', 1.50, 1, '2024-05-30'),
+(19, 'Chícharo', 2.00, 1, '2024-06-01'),
+(20, 'Brócoli', 1.75, 1, '2024-06-05'),
+(21, 'Calabaza', 4.00, 1, '2024-06-10'),
+(22, 'Guisante', 1.00, 1, '2024-06-15'),
+(23, 'Cacahuate', 2.50, 1, '2024-06-20'),
+(24, 'Cacao', 3.00, 1, '2024-06-25'),
+(25, 'Café', 2.00, 1, '2024-06-30'),
+(26, 'Arroz', 5.00, 1, '2024-07-05'),
+(27, 'Cebada', 2.50, 1, '2024-07-10'),
+(28, 'Lenteja', 1.75, 1, '2024-07-15'),
+(29, 'Girasol', 3.00, 1, '2024-07-20'),
+(30, 'Almendra', 1.50, 1, '2024-07-25'),
+(31, 'Hortalizas', 2.00, 1, '2024-08-01'),
+(32, 'Frutas', 3.50, 1, '2024-08-05'),
+(33, 'Hierbas aromáticas', 1.00, 1, '2024-08-10'),
+(34, 'Nuez', 1.75, 1, '2024-08-15'),
+(35, 'Perejil', 1.50, 1, '2024-08-20'),
+(36, 'Lima', 2.00, 1, '2024-08-25'),
+(37, 'Limón', 1.00, 1, '2024-09-01'),
+(38, 'Mango', 2.50, 1, '2024-09-05'),
+(39, 'Papaya', 1.75, 1, '2024-09-10'),
+(40, 'Piña', 2.00, 1, '2024-09-15'),
+(41, 'Granadilla', 1.50, 1, '2024-09-20'),
+(42, 'Ciruela', 1.00, 1, '2024-09-25'),
+(43, 'Naranja', 2.00, 1, '2024-09-30'),
+(44, 'Mandarina', 1.50, 1, '2024-10-05'),
+(45, 'Toronja', 1.00, 1, '2024-10-10'),
+(46, 'Cereza', 1.00, 1, '2024-10-15'),
+(47, 'Arándano', 1.50, 1, '2024-10-20'),
+(48, 'Fresa', 1.00, 1, '2024-10-25'),
+(49, 'Tamarindo', 1.50, 1, '2024-10-30'),
+(50, 'Mora', 1.00, 1, '2024-11-05');
+
+-- Inserciones para la tabla Producciones
+INSERT INTO Producciones (id_produccion, costo, fecha) VALUES
+(1, 1000.00, '2024-06-01'),
+(2, 1200.00, '2024-06-05'),
+(3, 900.00, '2024-06-10'),
+(4, 1500.00, '2024-06-15'),
+(5, 800.00, '2024-06-20'),
+(6, 1100.00, '2024-06-25'),
+(7, 1300.00, '2024-07-01'),
+(8, 700.00, '2024-07-05'),
+(9, 1600.00, '2024-07-10'),
+(10, 950.00, '2024-07-15'),
+(11, 1800.00, '2024-07-20'),
+(12, 1450.00, '2024-07-25'),
+(13, 1750.00, '2024-08-01'),
+(14, 1200.00, '2024-08-05'),
+(15, 850.00, '2024-08-10'),
+(16, 1100.00, '2024-08-15'),
+(17, 1000.00, '2024-08-20'),
+(18, 900.00, '2024-08-25'),
+(19, 950.00, '2024-09-01'),
+(20, 1400.00, '2024-09-05'),
+(21, 1250.00, '2024-09-10'),
+(22, 1300.00, '2024-09-15'),
+(23, 1150.00, '2024-09-20'),
+(24, 1750.00, '2024-09-25'),
+(25, 1600.00, '2024-10-01'),
+(26, 1300.00, '2024-10-05'),
+(27, 950.00, '2024-10-10'),
+(28, 1000.00, '2024-10-15'),
+(29, 900.00, '2024-10-20'),
+(30, 1500.00, '2024-10-25'),
+(31, 1800.00, '2024-10-30'),
+(32, 1100.00, '2024-11-05'),
+(33, 1400.00, '2024-11-10'),
+(34, 1200.00, '2024-11-15'),
+(35, 1300.00, '2024-11-20'),
+(36, 950.00, '2024-11-25'),
+(37, 1650.00, '2024-12-01'),
+(38, 1700.00, '2024-12-05'),
+(39, 1800.00, '2024-12-10'),
+(40, 1750.00, '2024-12-15'),
+(41, 1000.00, '2024-12-20'),
+(42, 1400.00, '2024-12-25'),
+(43, 1100.00, '2024-12-30'),
+(44, 1500.00, '2024-01-05'),
+(45, 1800.00, '2024-01-10'),
+(46, 1900.00, '2024-01-15'),
+(47, 1250.00, '2024-01-20'),
+(48, 1350.00, '2024-01-25'),
+(49, 1450.00, '2024-01-30'),
+(50, 1550.00, '2024-02-05');
+
+-- Inserciones para la tabla Cultivos_para_produccion
+INSERT INTO Cultivos_para_produccion (id, id_produccion, id_cultivo) VALUES
+(1, 1, 1),
+(2, 1, 2),
+(3, 2, 1),
+(4, 2, 3),
+(5, 3, 4),
+(6, 3, 5),
+(7, 4, 6),
+(8, 4, 7),
+(9, 5, 8),
+(10, 5, 9),
+(11, 6, 10),
+(12, 6, 11),
+(13, 7, 12),
+(14, 7, 13),
+(15, 8, 14),
+(16, 8, 15),
+(17, 9, 16),
+(18, 9, 17),
+(19, 10, 18),
+(20, 10, 19),
+(21, 11, 20),
+(22, 11, 21),
+(23, 12, 22),
+(24, 12, 23),
+(25, 13, 24),
+(26, 13, 25),
+(27, 14, 26),
+(28, 14, 27),
+(29, 15, 28),
+(30, 15, 29),
+(31, 16, 30),
+(32, 16, 31),
+(33, 17, 32),
+(34, 17, 33),
+(35, 18, 34),
+(36, 18, 35),
+(37, 19, 36),
+(38, 19, 37),
+(39, 20, 38),
+(40, 20, 39),
+(41, 21, 40),
+(42, 21, 41),
+(43, 22, 42),
+(44, 22, 43),
+(45, 23, 44),
+(46, 23, 45),
+(47, 24, 46),
+(48, 24, 47),
+(49, 25, 48),
+(50, 25, 49);
+
+-- Inserciones para la tabla Animales_para_produccion
+INSERT INTO Animales_para_produccion (id, id_produccion, id_animal, cantidad) VALUES
+(1, 1, 1, 3),
+(2, 1, 2, 2),
+(3, 2, 3, 4),
+(4, 2, 4, 5),
+(5, 3, 5, 10),
+(6, 3, 6, 8),
+(7, 4, 7, 2),
+(8, 4, 8, 1),
+(9, 5, 9, 5),
+(10, 5, 10, 6),
+(11, 6, 11, 7),
+(12, 6, 12, 4),
+(13, 7, 13, 3),
+(14, 7, 14, 2),
+(15, 8, 15, 6),
+(16, 8, 16, 5),
+(17, 9, 17, 4),
+(18, 9, 18, 3),
+(19, 10, 19, 8),
+(20, 10, 20, 7),
+(21, 11, 21, 2),
+(22, 11, 22, 3),
+(23, 12, 23, 5),
+(24, 12, 24, 4),
+(25, 13, 25, 6),
+(26, 13, 26, 8),
+(27, 14, 27, 2),
+(28, 14, 28, 1),
+(29, 15, 29, 7),
+(30, 15, 30, 5),
+(31, 16, 31, 3),
+(32, 16, 32, 2),
+(33, 17, 33, 6),
+(34, 17, 34, 4),
+(35, 18, 35, 5),
+(36, 18, 36, 3),
+(37, 19, 37, 2),
+(38, 19, 38, 3),
+(39, 20, 39, 1),
+(40, 20, 40, 2),
+(41, 21, 41, 6),
+(42, 21, 42, 4),
+(43, 22, 43, 3),
+(44, 22, 44, 5),
+(45, 23, 45, 2),
+(46, 23, 46, 1),
+(47, 24, 47, 3),
+(48, 24, 48, 4),
+(49, 25, 49, 5),
+(50, 25, 50, 2);
+
+-- Inserciones para la tabla Tipos_producto
+INSERT INTO Tipos_producto (id_tipo_producto, tipo) VALUES
+(1, 'Lácteo'),
+(2, 'Fruta'),
+(3, 'Verdura'),
+(4, 'Grano'),
+(5, 'Hierba'),
+(6, 'Carne'),
+(7, 'Huevo'),
+(8, 'Producto procesado'),
+(9, 'Semilla'),
+(10, 'Especia');
+
+-- Inserciones para la tabla Productos
+INSERT INTO Productos (id_producto, nombre, id_tipo_producto, precio, cantidad) VALUES
+(1, 'Leche', 1, 1.00, 200),
+(2, 'Queso', 1, 2.50, 100),
+(3, 'Yogur', 1, 1.75, 150),
+(4, 'Manzana', 2, 0.50, 300),
+(5, 'Plátano', 2, 0.30, 500),
+(6, 'Tomate', 3, 0.40, 400),
+(7, 'Zanahoria', 3, 0.25, 450),
+(8, 'Arroz', 4, 1.00, 250),
+(9, 'Frijoles', 4, 1.50, 200),
+(10, 'Perejil', 5, 0.75, 100),
+(11, 'Carne de res', 6, 5.00, 50),
+(12, 'Carne de cerdo', 6, 4.50, 75),
+(13, 'Huevo', 7, 0.20, 500),
+(14, 'Pan', 8, 1.00, 200),
+(15, 'Mantequilla', 8, 1.50, 150),
+(16, 'Almendra', 9, 2.00, 80),
+(17, 'Pimientas', 10, 0.80, 60),
+(18, 'Oréganos', 10, 0.50, 100),
+(19, 'Ajos', 10, 0.30, 200),
+(20, 'Cebollas', 3, 0.40, 300),
+(21, 'Espinacas', 3, 0.60, 250),
+(22, 'Pimientos', 3, 0.70, 220),
+(23, 'Berenjenas', 3, 0.90, 180),
+(24, 'Lechugas', 3, 0.50, 300),
+(25, 'Brócolis', 3, 1.00, 160),
+(26, 'Calabacines', 3, 0.75, 200),
+(27, 'Sandías', 2, 1.50, 120),
+(28, 'Melones', 2, 1.75, 100),
+(29, 'Kiwis', 2, 1.25, 150),
+(30, 'Piñas', 2, 2.00, 80),
+(31, 'Papayas', 2, 1.80, 110),
+(32, 'Naranjas', 2, 0.60, 200),
+(33, 'Mandarinas', 2, 0.40, 250),
+(34, 'Toronjas', 2, 0.70, 180),
+(35, 'Cerezas', 2, 1.00, 90),
+(36, 'Arándanos', 2, 1.20, 150),
+(37, 'Fresas', 2, 1.50, 160),
+(38, 'Moras', 2, 1.75, 130),
+(39, 'Nueces', 9, 2.50, 50),
+(40, 'Semilla de girasol', 9, 1.00, 70),
+(41, 'Semilla de calabaza', 9, 1.25, 60),
+(42, 'Cereal', 4, 0.90, 100),
+(43, 'Galleta', 8, 1.00, 200),
+(44, 'Chocolate', 8, 2.50, 150),
+(45, 'Salsa', 8, 1.25, 120),
+(46, 'Aceite', 8, 3.00, 80),
+(47, 'Vinagre', 8, 1.00, 90),
+(48, 'Aderezo', 8, 2.00, 70),
+(49, 'Merengue', 8, 1.50, 60);
+
+-- Inserciones para la tabla Productos_de_produccion
+INSERT INTO Productos_de_produccion (id, id_produccion, id_producto, cantidad) VALUES
+(1, 1, 1, 50),
+(2, 1, 4, 100),
+(3, 2, 2, 25),
+(4, 2, 5, 40),
+(5, 3, 3, 30),
+(6, 3, 6, 20),
+(7, 4, 7, 60),
+(8, 4, 8, 50),
+(9, 5, 9, 100),
+(10, 5, 10, 80),
+(11, 6, 11, 10),
+(12, 6, 12, 15),
+(13, 7, 13, 200),
+(14, 7, 14, 180),
+(15, 8, 15, 120),
+(16, 8, 16, 110),
+(17, 9, 17, 90),
+(18, 9, 18, 80),
+(19, 10, 19, 70),
+(20, 10, 20, 60),
+(21, 11, 21, 150),
+(22, 11, 22, 140),
+(23, 12, 23, 130),
+(24, 12, 24, 120),
+(25, 13, 25, 110),
+(26, 13, 26, 100),
+(27, 14, 27, 90),
+(28, 14, 28, 80),
+(29, 15, 29, 70),
+(30, 15, 30, 60),
+(31, 16, 31, 150),
+(32, 16, 32, 140),
+(33, 17, 33, 130),
+(34, 17, 34, 120),
+(35, 18, 35, 110),
+(36, 18, 36, 100),
+(37, 19, 37, 90),
+(38, 19, 38, 80),
+(39, 20, 39, 70),
+(40, 20, 40, 60),
+(41, 21, 41, 50),
+(42, 21, 42, 40),
+(43, 22, 43, 30),
+(44, 22, 44, 20),
+(45, 23, 45, 10),
+(46, 23, 46, 5),
+(47, 24, 47, 4),
+(48, 24, 48, 3),
+(49, 25, 49, 2),
+(50, 25, 50, 1);
+
+-- Inserciones para la tabla Locaciones_almacenamiento
+
+INSERT INTO Locaciones_almacenamiento (id_locacion, nombre, capacidad_maxima, capacidad_disponible) VALUES
+(1, 'Almacén Principal', 5000, 3000),
+(2, 'Almacén Secundario', 3000, 2000),
+(3, 'Frigorífico', 1500, 800),
+(4, 'Bodega de Granos', 4000, 2500),
+(5, 'Almacén de Lácteos', 2000, 1000),
+(6, 'Almacén de Verduras', 1000, 500),
+(7, 'Almacén de Frutas', 1200, 600),
+(8, 'Almacén de Carne', 800, 400),
+(9, 'Almacén de Semillas', 700, 350),
+(10, 'Almacén de Fertilizantes', 600, 300);
+
+-- Inserciones para la tabla Productos_en_locación
+INSERT INTO Productos_en_locacion (id, id_locacion, id_producto, cantidad) VALUES
+(1, 1, 1, 300),
+(2, 1, 2, 150),
+(3, 1, 4, 500),
+(4, 2, 3, 200),
+(5, 2, 5, 300),
+(6, 2, 6, 250),
+(7, 3, 11, 100),
+(8, 3, 12, 75),
+(9, 4, 9, 600),
+(10, 4, 10, 400),
+(11, 5, 13, 500),
+(12, 5, 14, 350),
+(13, 6, 15, 200),
+(14, 6, 16, 100),
+(15, 7, 17, 150),
+(16, 7, 18, 120),
+(17, 8, 19, 80),
+(18, 8, 20, 60),
+(19, 9, 21, 30),
+(20, 9, 22, 25),
+(21, 10, 23, 15),
+(22, 10, 24, 10),
+(23, 1, 25, 5),
+(24, 1, 26, 4),
+(25, 2, 27, 2),
+(26, 2, 28, 1),
+(27, 3, 29, 3),
+(28, 3, 30, 2);
+
+-- Inserciones para la tabla Tipos_tarea
+INSERT INTO Tipos_tarea (id_tipo_tarea, tipo) VALUES
+(1, 'Siembra'),
+(2, 'Cosecha'),
+(3, 'Riego'),
+(4, 'Fertilización'),
+(5, 'Mantenimiento'),
+(6, 'Tratamiento de Cultivos'),
+(7, 'Control de Plagas'),
+(8, 'Almacenamiento'),
+(9, 'Transporte'),
+(10, 'Recolección');
+
+-- Inserciones para la tabla Estados_tarea
+INSERT INTO Estados_tarea (id_estado, estado) VALUES
+(1, 'Pendiente'),
+(2, 'En Progreso'),
+(3, 'Completada'),
+(4, 'Cancelada'),
+(5, 'Reprogramada');
+
+-- Inserciones para la tabla Tareas
+INSERT INTO Tareas (id_tarea, descripcion_tarea, id_tipo_tarea, fecha, id_estado) VALUES
+(1, 'Siembra de maíz', 1, '2024-03-01', 1),
+(2, 'Cosecha de aguacates', 2, '2024-06-15', 1),
+(3, 'Riego de cultivos', 3, '2024-04-10', 1),
+(4, 'Fertilización de campo', 4, '2024-04-20', 1),
+(5, 'Mantenimiento de maquinaria', 5, '2024-05-05', 1),
+(6, 'Tratamiento de plagas', 6, '2024-05-15', 1),
+(7, 'Recolección de frutas', 10, '2024-07-01', 1),
+(8, 'Almacenamiento de leche', 8, '2024-07-10', 1),
+(9, 'Transporte de productos', 9, '2024-07-15', 1),
+(10, 'Cosecha de hortalizas', 2, '2024-06-25', 1),
+(11, 'Siembra de frijoles', 1, '2024-04-05', 1),
+(12, 'Cosecha de trigo', 2, '2024-07-20', 1),
+(13, 'Fertilización de pastos', 4, '2024-04-15', 1),
+(14, 'Control de malezas', 7, '2024-04-25', 1),
+(15, 'Inspección de cultivos', 5, '2024-05-01', 1),
+(16, 'Siembra de verduras', 1, '2024-03-15', 1),
+(17, 'Recolección de maíz', 10, '2024-08-01', 1),
+(18, 'Riego de pastos', 3, '2024-05-10', 1),
+(19, 'Almacenamiento de granos', 8, '2024-05-25', 1),
+(20, 'Mantenimiento de riego', 5, '2024-06-05', 1),
+(21, 'Tratamiento de cultivos de hortalizas', 6, '2024-06-15', 1),
+(22, 'Control de plagas en maíz', 7, '2024-06-20', 1),
+(23, 'Siembra de arroz', 1, '2024-05-30', 1),
+(24, 'Cosecha de legumbres', 2, '2024-08-15', 1),
+(25, 'Transporte de hortalizas', 9, '2024-08-20', 1),
+(26, 'Riego de aguacates', 3, '2024-07-05', 1),
+(27, 'Fertilización de aguacates', 4, '2024-07-10', 1),
+(28, 'Control de malezas en hortalizas', 7, '2024-07-15', 1),
+(29, 'Mantenimiento de invernadero', 5, '2024-07-20', 1),
+(30, 'Inspección de cultivos de frijoles', 5, '2024-08-01', 1),
+(31, 'Siembra de cebollas', 1, '2024-08-05', 1),
+(32, 'Cosecha de cebollas', 2, '2024-08-10', 1),
+(33, 'Almacenamiento de verduras', 8, '2024-08-12', 1),
+(34, 'Riego de cebollas', 3, '2024-08-15', 1),
+(35, 'Tratamiento de cebollas', 6, '2024-08-20', 1),
+(36, 'Recolección de verduras', 10, '2024-08-22', 1),
+(37, 'Transporte de cebollas', 9, '2024-08-25', 1),
+(38, 'Fertilización de cebollas', 4, '2024-08-28', 1),
+(39, 'Control de plagas en cebollas', 7, '2024-08-30', 1),
+(40, 'Mantenimiento de cultivos de cebollas', 5, '2024-09-01', 1),
+(41, 'Siembra de hierbas', 1, '2024-09-05', 1),
+(42, 'Cosecha de hierbas', 2, '2024-09-10', 1),
+(43, 'Almacenamiento de hierbas', 8, '2024-09-12', 1),
+(44, 'Riego de hierbas', 3, '2024-09-15', 1),
+(45, 'Tratamiento de hierbas', 6, '2024-09-20', 1),
+(46, 'Recolección de hierbas', 10, '2024-09-22', 1),
+(47, 'Transporte de hierbas', 9, '2024-09-25', 1),
+(48, 'Fertilización de hierbas', 4, '2024-09-28', 1),
+(49, 'Control de plagas en hierbas', 7, '2024-09-30', 1),
+(50, 'Mantenimiento de cultivos de hierbas', 5, '2024-10-01', 1);
+
+-- Inserciones para la tabla Tareas_de_producción
+INSERT INTO Tareas_de_producción (id, id_producción, id_tarea) VALUES
+(1, 1, 1),
+(2, 2, 2),
+(3, 3, 3),
+(4, 4, 4),
+(5, 5, 5),
+(6, 6, 6),
+(7, 7, 7),
+(8, 8, 8),
+(9, 9, 9),
+(10, 10, 10),
+(11, 11, 11),
+(12, 12, 12),
+(13, 13, 13),
+(14, 14, 14),
+(15, 15, 15),
+(16, 16, 16),
+(17, 17, 17),
+(18, 18, 18),
+(19, 19, 19),
+(20, 20, 20),
+(21, 21, 21),
+(22, 22, 22),
+(23, 23, 23),
+(24, 24, 24),
+(25, 25, 25),
+(26, 26, 26),
+(27, 27, 27),
+(28, 28, 28),
+(29, 29, 29),
+(30, 30, 30),
+(31, 31, 31),
+(32, 32, 32),
+(33, 33, 33),
+(34, 34, 34),
+(35, 35, 35),
+(36, 36, 36),
+(37, 37, 37),
+(38, 38, 38),
+(39, 39, 39),
+(40, 40, 40),
+(41, 41, 41),
+(42, 42, 42),
+(43, 43, 43),
+(44, 44, 44),
+(45, 45, 45),
+(46, 46, 46),
+(47, 47, 47),
+(48, 48, 48),
+(49, 49, 49),
+(50, 50, 50);
+
 -- Inserciones para la tabla Categorías
 INSERT INTO Categorias (id_categoria, nombre) VALUES
 (1, 'Vehículo'),

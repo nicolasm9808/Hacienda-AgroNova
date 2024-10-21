@@ -148,7 +148,7 @@ CREATE TABLE IF NOT EXISTS Categorias (
     nombre VARCHAR(100) NOT NULL UNIQUE
 );
 
---Tabla Activos-insumos
+-- Tabla Activos-insumos
 CREATE TABLE IF NOT EXISTS Activos_insumos (
     id_activo INT PRIMARY KEY,
     nombre VARCHAR(100) NOT NULL,
@@ -214,7 +214,7 @@ CREATE TABLE IF NOT EXISTS Estados (
     estado VARCHAR(100) NOT NULL UNIQUE
 );
 
--- Tabla Equipod_de_trabajo
+-- Tabla Equipos_de_trabajo
 CREATE TABLE IF NOT EXISTS Equipos_de_trabajo (
     id_equipo INT PRIMARY KEY,
     id_activo INT NOT NULL UNIQUE,
