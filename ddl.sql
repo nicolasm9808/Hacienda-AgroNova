@@ -142,10 +142,18 @@ CREATE TABLE IF NOT EXISTS Tareas_de_producción (
     FOREIGN KEY (id_tarea) REFERENCES Tareas (id_tarea)
 );
 
+-- Tabla Categorias
+CREATE TABLE IF NOT EXISTS Categorias (
+    id_categoria INT PRIMARY KEY,
+    nombre VARCHAR(100) NOT NULL UNIQUE
+);
+
 --Tabla Activos-insumos
-CREATE TABLE IF NOT EXISTS Activos (
+CREATE TABLE IF NOT EXISTS Activos_insumos (
     id_activo INT PRIMARY KEY,
-    nombre VARCHAR(100) NOT NULL
+    nombre VARCHAR(100) NOT NULL,
+    id_categoria INT NOT NULL,
+    FOREIGN KEY (id_categoria) REFERENCES Categorias (id_categoria)
 );
 
 -- Tabla Activos_en_tarea
@@ -154,7 +162,7 @@ CREATE TABLE IF NOT EXISTS Activos_en_tarea (
     id_tarea INT NOT NULL,
     FOREIGN KEY (id_tarea) REFERENCES Tareas (id_tarea),
     id_activo INT NOT NULL,
-    FOREIGN KEY (id_activo) REFERENCES Activos (id_activo),
+    FOREIGN KEY (id_activo) REFERENCES Activos_insumos (id_activo),
     cantidad INT NOT NULL CHECK(cantidad >= 0)
 );
 
@@ -165,10 +173,10 @@ CREATE TABLE IF NOT EXISTS Tipos_vehiculo (
 );
 
 -- Tabla Vehículos
-CREATE TABLE IF NOT EXISTS Vehículos (
-    id_vehículo INT PRIMARY KEY,
+CREATE TABLE IF NOT EXISTS Vehiculos (
+    id_vehiculo INT PRIMARY KEY,
     id_activo INT NOT NULL UNIQUE,
-    FOREIGN KEY (id_activo) REFERENCES Activos (id_activo),
+    FOREIGN KEY (id_activo) REFERENCES Activos_insumos (id_activo),
     marca VARCHAR(100),
     modelo VARCHAR(100),
     id_tipo_vehiculo INT NOT NULL,
@@ -191,7 +199,7 @@ CREATE TABLE IF NOT EXISTS Unidades_medida (
 CREATE TABLE IF NOT EXISTS Insumos (
     id_insumo INT PRIMARY KEY,
     id_activo INT NOT NULL UNIQUE,
-    FOREIGN KEY (id_activo) REFERENCES Activos (id_activo),
+    FOREIGN KEY (id_activo) REFERENCES Activos_insumos (id_activo),
     id_unidad_medida INT NOT NULL,
     FOREIGN KEY (id_unidad_medida) REFERENCES Unidades_medida (id_unidad_medida),
     id_tipo_insumo INT NOT NULL,
@@ -210,7 +218,7 @@ CREATE TABLE IF NOT EXISTS Estados (
 CREATE TABLE IF NOT EXISTS Equipos_de_trabajo (
     id_equipo INT PRIMARY KEY,
     id_activo INT NOT NULL UNIQUE,
-    FOREIGN KEY (id_activo) REFERENCES Activos (id_activo),
+    FOREIGN KEY (id_activo) REFERENCES Activos_insumos (id_activo),
     descripcion TEXT,
     id_estado INT NOT NULL,
     FOREIGN KEY (id_estado) REFERENCES Estados (id_estado),
@@ -221,7 +229,7 @@ CREATE TABLE IF NOT EXISTS Equipos_de_trabajo (
 CREATE TABLE IF NOT EXISTS Maquinas (
     id_maquina INT PRIMARY KEY,
     id_activo INT NOT NULL UNIQUE,
-    FOREIGN KEY (id_activo) REFERENCES Activos (id_activo),
+    FOREIGN KEY (id_activo) REFERENCES Activos_insumos (id_activo),
     descripcion TEXT,
     marca VARCHAR(100),
     modelo VARCHAR(100),
@@ -294,7 +302,7 @@ CREATE TABLE IF NOT EXISTS Detalles_compra (
     id_compra INT NOT NULL,
     FOREIGN KEY (id_compra) REFERENCES Compras (id_compra),
     id_activo INT NOT NULL,
-    FOREIGN KEY (id_activo) REFERENCES Activos (id_activo),
+    FOREIGN KEY (id_activo) REFERENCES Activos_insumos (id_activo),
     precio_unitario DECIMAL(10,2) NOT NULL CHECK(precio_unitario >= 0),
     cantidad INT NOT NULL CHECK(cantidad >= 0)
 );
