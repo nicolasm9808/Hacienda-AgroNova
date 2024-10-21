@@ -130,7 +130,7 @@ CREATE TABLE IF NOT EXISTS Tareas (
     FOREIGN KEY (id_tipo_tarea) REFERENCES Tipos_tarea (id_tipo_tarea),
     fecha DATE NOT NULL,
     id_estado INT NOT NULL,
-    FOREIGN KEY (id_estado) REFERENCES Estados_cultivo (id_estado_cultivo)
+    FOREIGN KEY (id_estado) REFERENCES Estados_tarea (id_estado)
 );
 
 -- Tabla Tareas_de_producción
