@@ -64,8 +64,7 @@ FROM Ventas v
 JOIN Clientes c ON v.id_cliente = c.id_cliente
 WHERE v.fecha BETWEEN DATE_SUB(CURRENT_DATE, INTERVAL 1 YEAR) AND CURRENT_DATE
 GROUP BY c.id_cliente
-ORDER BY total_compras DESC
-LIMIT 10;
+ORDER BY total_compras DESC LIMIT 10;
 
 -- 11. Ventas por mes
 SELECT DATE_FORMAT(v.fecha, '%Y-%m') AS mes, SUM(v.total) AS total_ventas
@@ -120,8 +119,7 @@ FROM (SELECT DATE_FORMAT(p.fecha, '%Y-%m') AS mes, SUM(p.costo) AS costo_total
       GROUP BY mes) prod
 JOIN (SELECT DATE_FORMAT(c.fecha, '%Y-%m') AS mes, SUM(c.total) AS costo_total_compras
       FROM Compras c
-      GROUP BY mes) comp
-ON prod.mes = comp.mes;
+      GROUP BY mes) comp ON prod.mes = comp.mes;
 
 -- 19. Desglose mensual de costos por categoría de activo
 SELECT DATE_FORMAT(c.fecha, '%Y-%m') AS mes, ca.nombre AS categoria, SUM(dc.precio_unitario * dc.cantidad) AS costo_total
@@ -151,11 +149,14 @@ GROUP BY e.id_empleado
 ORDER BY tareas_completadas DESC;
 
 -- 22. Salario total mensual por empleado
-SELECT e.nombre AS empleado, e.salario, COUNT(h.id_horario) AS dias_trabajados, 
-       (e.salario / 30) * COUNT(h.id_horario) AS salario_mensual
+SELECT e.nombre AS empleado, 
+       ROUND(e.salario, 2) AS salario, 
+       COUNT(h.id_horario) AS dias_trabajados, 
+       ROUND((e.salario / 30) * COUNT(h.id_horario), 2) AS salario_mensual
 FROM Empleados e
 JOIN Horarios h ON e.id_empleado = h.id_empleado
 GROUP BY e.id_empleado;
+
 
 -- 23. Empleados con más horas trabajadas en el último mes
 SELECT e.nombre AS empleado, SUM(TIMESTAMPDIFF(HOUR, h.hora_inicio, h.hora_fin)) AS horas_totales
@@ -195,8 +196,7 @@ JOIN Cultivos_para_produccion cp ON p.id_produccion = cp.id_produccion
 JOIN Cultivos c ON cp.id_cultivo = c.id_cultivo
 WHERE p.fecha BETWEEN DATE_SUB(CURRENT_DATE, INTERVAL 6 MONTH) AND CURRENT_DATE
 GROUP BY c.id_cultivo
-ORDER BY cantidad_producida DESC
-LIMIT 5;
+ORDER BY cantidad_producida DESC LIMIT 5;
 
 -- 28. Historial de rendimiento de un cultivo específico por mes
 SELECT DATE_FORMAT(p.fecha, '%Y-%m') AS mes, SUM(cp.id_cultivo) AS cantidad_producida
@@ -265,8 +265,7 @@ JOIN Productos p ON dv.id_producto = p.id_producto
 JOIN Ventas v ON dv.id_venta = v.id_venta
 WHERE v.fecha BETWEEN DATE_SUB(CURRENT_DATE, INTERVAL 3 MONTH) AND CURRENT_DATE
 GROUP BY p.id_producto
-ORDER BY total_ganancia DESC
-LIMIT 1;
+ORDER BY total_ganancia DESC LIMIT 1;
 
 -- 37. Ganancia total por tipo de producto
 SELECT tp.tipo AS tipo_producto, SUM(dv.cantidad * p.precio) AS ganancia_total
@@ -293,8 +292,7 @@ JOIN Activos_insumos ai ON dc.id_activo = ai.id_activo
 JOIN Compras c ON dc.id_compra = c.id_compra
 WHERE c.fecha BETWEEN DATE_SUB(CURRENT_DATE, INTERVAL 1 YEAR) AND CURRENT_DATE
 GROUP BY ai.id_activo
-ORDER BY cantidad_comprada DESC
-LIMIT 10;
+ORDER BY cantidad_comprada DESC LIMIT 10;
 
 -- 41. Insumos con más compras por proveedor
 SELECT pr.nombre AS proveedor, ai.nombre AS insumo, SUM(dc.cantidad) AS cantidad_comprada
@@ -381,8 +379,7 @@ GROUP BY mes;
 SELECT DATE_FORMAT(c.fecha, '%Y-%m') AS mes, SUM(c.total) AS total_compras
 FROM Compras c
 GROUP BY mes
-ORDER BY total_compras DESC
-LIMIT 3;
+ORDER BY total_compras DESC LIMIT 3;
 
 -- 53. Número de insumos comprados por tipo y proveedor en el último año
 SELECT ti.tipo AS tipo_insumo, p.nombre AS proveedor, SUM(dc.cantidad) AS total_insumos
@@ -407,8 +404,7 @@ SELECT l.nombre AS locacion, p.nombre AS producto, pl.cantidad AS cantidad_dispo
 FROM Productos_en_locacion pl
 JOIN Productos p ON pl.id_producto = p.id_producto
 JOIN Locaciones_almacenamiento l ON pl.id_locacion = l.id_locacion
-ORDER BY pl.cantidad DESC
-LIMIT 5;
+ORDER BY pl.cantidad DESC LIMIT 5;
 
 -- 56. Total de stock por producto
 SELECT p.nombre AS producto, SUM(pl.cantidad) AS total_stock
@@ -450,7 +446,7 @@ ON p.mes = v.mes
 ORDER BY ganancia DESC;
 
 -- 61. Animales involucrados en producción por especie
-SELECT e.especie, COUNT(ap.id_animal) AS animales_involucrados
+SELECT e.especie, COUNT(ap.id_animal) AS animales_involucrados_produccion
 FROM Animales_para_produccion ap
 JOIN Animales a ON ap.id_animal = a.id_animal
 JOIN Especies e ON a.id_especie = e.id_especie
@@ -470,8 +466,7 @@ FROM Ventas v
 JOIN Clientes c ON v.id_cliente = c.id_cliente
 WHERE v.fecha BETWEEN DATE_SUB(CURRENT_DATE, INTERVAL 6 MONTH) AND CURRENT_DATE
 GROUP BY c.id_cliente
-ORDER BY total_compras DESC
-LIMIT 10;
+ORDER BY total_compras DESC LIMIT 10;
 
 -- 64. Detalle de ventas por producto en el último año
 SELECT p.nombre AS producto, SUM(dv.cantidad) AS total_vendido, SUM(dv.cantidad * p.precio) AS ganancia_total
@@ -545,8 +540,7 @@ JOIN Empleados e ON et.id_empleado = e.id_empleado
 JOIN Tareas t ON et.id_tarea = t.id_tarea
 WHERE t.fecha BETWEEN DATE_SUB(CURRENT_DATE, INTERVAL 3 MONTH) AND CURRENT_DATE
 GROUP BY e.id_empleado
-ORDER BY tareas_asignadas ASC
-LIMIT 5;
+ORDER BY tareas_asignadas ASC LIMIT 5;
 
 -- 73. Resumen de horas trabajadas por empleado en el último mes
 SELECT e.nombre AS empleado, SUM(TIMESTAMPDIFF(HOUR, h.hora_inicio, h.hora_fin)) AS horas_trabajadas
@@ -631,8 +625,7 @@ JOIN Empleados_en_tarea et ON e.id_empleado = et.id_empleado
 JOIN Tareas t ON et.id_tarea = t.id_tarea
 WHERE t.id_estado = (SELECT id_estado FROM Estados_tarea WHERE estado = 'Completada')
 GROUP BY e.id_empleado
-ORDER BY tareas_completadas DESC
-LIMIT 5;
+ORDER BY tareas_completadas DESC LIMIT 5;
 
 -- 84. Ingresos anuales totales agrupados por cliente
 SELECT c.nombre AS cliente, SUM(v.total) AS total_ingresos
@@ -751,8 +744,7 @@ SELECT t.descripcion_tarea, t.fecha, TIMESTAMPDIFF(DAY, t.fecha, NOW()) AS dias_
 FROM Tareas t
 JOIN Estados_tarea est ON t.id_estado = est.id_estado
 WHERE est.estado = 'Completada'
-ORDER BY dias_transcurridos ASC
-LIMIT 10;
+ORDER BY dias_transcurridos ASC LIMIT 10;
 
 -- 99. Comparación de costos de producción con ingresos por ventas para los cultivos más vendidos
 SELECT c.nombre AS cultivo, SUM(pr.costo) AS costo_produccion, SUM(dv.cantidad * p.precio) AS total_ventas, (SUM(dv.cantidad * p.precio) - SUM(pr.costo)) AS ganancia_neta
@@ -765,5 +757,4 @@ JOIN Detalles_venta dv ON p.id_producto = dv.id_producto
 GROUP BY c.id_cultivo
 ORDER BY ganancia_neta DESC;
 
--- 100. Clientes que representan más del 10% de las ventas anuales
-SELECT c.nombre AS cliente, SUM(v.total) AS
+
