@@ -4,19 +4,19 @@ USE Hacienda_AgroNova;
 
 -- Tabla Especies
 CREATE TABLE IF NOT EXISTS Especies (
-    id_especie INT PRIMARY KEY,
+    id_especie INT PRIMARY KEY AUTO_INCREMENT,
     especie VARCHAR(100) NOT NULL UNIQUE
 );
 
 -- Tabla Estados_animales
 CREATE TABLE IF NOT EXISTS Estados_animales (
-    id_estado_animal INT PRIMARY KEY,
+    id_estado_animal INT PRIMARY KEY AUTO_INCREMENT,
     estado VARCHAR(100) NOT NULL UNIQUE
 );
 
 -- Tabla Animales
 CREATE TABLE IF NOT EXISTS Animales (
-    id_animal INT PRIMARY KEY,
+    id_animal INT PRIMARY KEY AUTO_INCREMENT,
     id_especie INT NOT NULL,
     FOREIGN KEY (id_especie) REFERENCES Especies (id_especie),
     edad INT CHECK(edad >= 0),
@@ -26,13 +26,13 @@ CREATE TABLE IF NOT EXISTS Animales (
 
 -- Tabla Estados_cultivo
 CREATE TABLE IF NOT EXISTS Estados_cultivo (
-    id_estado_cultivo INT PRIMARY KEY,
+    id_estado_cultivo INT PRIMARY KEY AUTO_INCREMENT,
     estado VARCHAR(100) NOT NULL UNIQUE
 );
 
 -- Tabla Cultivos
 CREATE TABLE IF NOT EXISTS Cultivos (
-    id_cultivo INT PRIMARY KEY,
+    id_cultivo INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL UNIQUE,
     areas_hectareas DECIMAL(10, 2) NOT NULL CHECK(areas_hectareas > 0),
     id_estado_cultivo INT NOT NULL,
@@ -42,14 +42,14 @@ CREATE TABLE IF NOT EXISTS Cultivos (
 
 -- Tabla Producciones
 CREATE TABLE IF NOT EXISTS Producciones (
-    id_produccion INT PRIMARY KEY,
+    id_produccion INT PRIMARY KEY AUTO_INCREMENT,
     costo DECIMAL(10, 2) NOT NULL CHECK(costo >= 0),
     fecha DATE NOT NULL
 );
 
 -- Tabla Cultivos_para_produccion
 CREATE TABLE IF NOT EXISTS Cultivos_para_produccion (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     id_produccion INT NOT NULL,
     FOREIGN KEY (id_produccion) REFERENCES Producciones (id_produccion),
     id_cultivo INT NOT NULL,
@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS Cultivos_para_produccion (
 
 -- Tabla Animales_para_produccion
 CREATE TABLE IF NOT EXISTS Animales_para_produccion (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     id_produccion INT NOT NULL,
     FOREIGN KEY (id_produccion) REFERENCES Producciones (id_produccion),
     id_animal INT NOT NULL,
@@ -68,13 +68,13 @@ CREATE TABLE IF NOT EXISTS Animales_para_produccion (
 
 -- Tabla Tipos_producto
 CREATE TABLE IF NOT EXISTS Tipos_producto (
-    id_tipo_producto INT PRIMARY KEY,
+    id_tipo_producto INT PRIMARY KEY AUTO_INCREMENT,
     tipo VARCHAR(100) NOT NULL
 );
 
 -- Tabla Productos
 CREATE TABLE IF NOT EXISTS Productos (
-    id_producto INT PRIMARY KEY,
+    id_producto INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL UNIQUE,
     id_tipo_producto INT NOT NULL,
     FOREIGN KEY (id_tipo_producto) REFERENCES Tipos_producto (id_tipo_producto),
@@ -84,7 +84,7 @@ CREATE TABLE IF NOT EXISTS Productos (
 
 -- Tabla Productos_de_produccion
 CREATE TABLE IF NOT EXISTS Productos_de_produccion (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     id_produccion INT NOT NULL,
     FOREIGN KEY (id_produccion) REFERENCES Producciones (id_produccion),
     id_producto INT NOT NULL,
@@ -94,7 +94,7 @@ CREATE TABLE IF NOT EXISTS Productos_de_produccion (
 
 -- Tabla Locaciones_almacenamiento
 CREATE TABLE IF NOT EXISTS Locaciones_almacenamiento (
-    id_locacion INT PRIMARY KEY,
+    id_locacion INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL UNIQUE,
     capacidad_maxima INT NOT NULL CHECK(capacidad_maxima > 0),
     capacidad_disponible INT NOT NULL CHECK(capacidad_disponible >= 0)
@@ -102,7 +102,7 @@ CREATE TABLE IF NOT EXISTS Locaciones_almacenamiento (
 
 -- Tabla Productos_en_locacion
 CREATE TABLE IF NOT EXISTS Productos_en_locacion (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     id_locacion INT NOT NULL,
     FOREIGN KEY (id_locacion) REFERENCES Locaciones_almacenamiento (id_locacion),
     id_producto INT NOT NULL,
@@ -112,19 +112,19 @@ CREATE TABLE IF NOT EXISTS Productos_en_locacion (
 
 -- Tabla Tipos_tarea
 CREATE TABLE IF NOT EXISTS Tipos_tarea (
-    id_tipo_tarea INT PRIMARY KEY,
+    id_tipo_tarea INT PRIMARY KEY AUTO_INCREMENT,
     tipo VARCHAR(100) NOT NULL UNIQUE
 );
 
 -- Tabla Estado_tarea
 CREATE TABLE IF NOT EXISTS Estados_tarea (
-    id_estado INT PRIMARY KEY,
+    id_estado INT PRIMARY KEY AUTO_INCREMENT,
     estado VARCHAR(100) NOT NULL UNIQUE
 );
 
 -- Tabla Tareas
 CREATE TABLE IF NOT EXISTS Tareas (
-    id_tarea INT PRIMARY KEY,
+    id_tarea INT PRIMARY KEY AUTO_INCREMENT,
     descripcion_tarea TEXT NOT NULL,
     id_tipo_tarea INT NOT NULL,
     FOREIGN KEY (id_tipo_tarea) REFERENCES Tipos_tarea (id_tipo_tarea),
@@ -135,7 +135,7 @@ CREATE TABLE IF NOT EXISTS Tareas (
 
 -- Tabla Tareas_de_producción
 CREATE TABLE IF NOT EXISTS Tareas_de_producción (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     id_producción INT NOT NULL,
     FOREIGN KEY (id_producción) REFERENCES Producciones (id_produccion),
     id_tarea INT NOT NULL,
@@ -144,13 +144,13 @@ CREATE TABLE IF NOT EXISTS Tareas_de_producción (
 
 -- Tabla Categorias
 CREATE TABLE IF NOT EXISTS Categorias (
-    id_categoria INT PRIMARY KEY,
+    id_categoria INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL UNIQUE
 );
 
 -- Tabla Activos-insumos
 CREATE TABLE IF NOT EXISTS Activos_insumos (
-    id_activo INT PRIMARY KEY,
+    id_activo INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(100) NOT NULL,
     id_categoria INT NOT NULL,
     FOREIGN KEY (id_categoria) REFERENCES Categorias (id_categoria)
@@ -158,7 +158,7 @@ CREATE TABLE IF NOT EXISTS Activos_insumos (
 
 -- Tabla Activos_en_tarea
 CREATE TABLE IF NOT EXISTS Activos_en_tarea (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     id_tarea INT NOT NULL,
     FOREIGN KEY (id_tarea) REFERENCES Tareas (id_tarea),
     id_activo INT NOT NULL,
@@ -168,13 +168,13 @@ CREATE TABLE IF NOT EXISTS Activos_en_tarea (
 
 -- Tabla Tipos_vehículo
 CREATE TABLE IF NOT EXISTS Tipos_vehiculo (
-    id_tipo_vehiculo INT PRIMARY KEY,
+    id_tipo_vehiculo INT PRIMARY KEY AUTO_INCREMENT,
     tipo VARCHAR(100) NOT NULL UNIQUE
 );
 
 -- Tabla Vehículos
 CREATE TABLE IF NOT EXISTS Vehiculos (
-    id_vehiculo INT PRIMARY KEY,
+    id_vehiculo INT PRIMARY KEY AUTO_INCREMENT,
     id_activo INT NOT NULL UNIQUE,
     FOREIGN KEY (id_activo) REFERENCES Activos_insumos (id_activo),
     marca VARCHAR(100),
@@ -185,19 +185,19 @@ CREATE TABLE IF NOT EXISTS Vehiculos (
 
 -- Tabla Tipos:insumo
 CREATE TABLE IF NOT EXISTS Tipos_insumo (
-    id_tipo_insumo INT PRIMARY KEY,
+    id_tipo_insumo INT PRIMARY KEY AUTO_INCREMENT,
     tipo VARCHAR(100) NOT NULL UNIQUE
 );
 
 -- Tabla Unidades_medida
 CREATE TABLE IF NOT EXISTS Unidades_medida (
-    id_unidad_medida INT PRIMARY KEY,
+    id_unidad_medida INT PRIMARY KEY AUTO_INCREMENT,
     unidad VARCHAR(100) NOT NULL UNIQUE
 );
 
 -- Tabla Insumos
 CREATE TABLE IF NOT EXISTS Insumos (
-    id_insumo INT PRIMARY KEY,
+    id_insumo INT PRIMARY KEY AUTO_INCREMENT,
     id_activo INT NOT NULL UNIQUE,
     FOREIGN KEY (id_activo) REFERENCES Activos_insumos (id_activo),
     id_unidad_medida INT NOT NULL,
@@ -210,13 +210,13 @@ CREATE TABLE IF NOT EXISTS Insumos (
 
 -- Tabla Estado
 CREATE TABLE IF NOT EXISTS Estados (
-    id_estado INT PRIMARY KEY,
+    id_estado INT PRIMARY KEY AUTO_INCREMENT,
     estado VARCHAR(100) NOT NULL UNIQUE
 );
 
 -- Tabla Equipos_de_trabajo
 CREATE TABLE IF NOT EXISTS Equipos_de_trabajo (
-    id_equipo INT PRIMARY KEY,
+    id_equipo INT PRIMARY KEY AUTO_INCREMENT,
     id_activo INT NOT NULL UNIQUE,
     FOREIGN KEY (id_activo) REFERENCES Activos_insumos (id_activo),
     descripcion TEXT,
@@ -227,7 +227,7 @@ CREATE TABLE IF NOT EXISTS Equipos_de_trabajo (
 
 -- Tabla Maquinas
 CREATE TABLE IF NOT EXISTS Maquinas (
-    id_maquina INT PRIMARY KEY,
+    id_maquina INT PRIMARY KEY AUTO_INCREMENT,
     id_activo INT NOT NULL UNIQUE,
     FOREIGN KEY (id_activo) REFERENCES Activos_insumos (id_activo),
     descripcion TEXT,
@@ -239,13 +239,13 @@ CREATE TABLE IF NOT EXISTS Maquinas (
 
 -- Tabla Departamentos
 CREATE TABLE IF NOT EXISTS Departamentos (
-    id_departamento INT PRIMARY KEY,
+    id_departamento INT PRIMARY KEY AUTO_INCREMENT,
     departamento VARCHAR(100) NOT NULL UNIQUE
 );
 
 -- Tabla Municipios
 CREATE TABLE IF NOT EXISTS Municipios (
-    id_municipio INT PRIMARY KEY,
+    id_municipio INT PRIMARY KEY AUTO_INCREMENT,
     municipio VARCHAR(100) NOT NULL UNIQUE,
     id_departamento INT NOT NULL,
     FOREIGN KEY (id_departamento) REFERENCES Departamentos (id_departamento)
@@ -253,7 +253,7 @@ CREATE TABLE IF NOT EXISTS Municipios (
 
 -- Tabla Ubicaciones
 CREATE TABLE IF NOT EXISTS Ubicaciones (
-    id_ubicacion INT PRIMARY KEY,
+    id_ubicacion INT PRIMARY KEY AUTO_INCREMENT,
     direccion VARCHAR(255) NOT NULL,
     id_municipio INT NOT NULL,
     FOREIGN KEY (id_municipio) REFERENCES Municipios (id_municipio)
@@ -261,13 +261,13 @@ CREATE TABLE IF NOT EXISTS Ubicaciones (
 
 -- Tabla Tipos_cliente
 CREATE TABLE IF NOT EXISTS Tipos_cliente (
-    id_tipo_cliente INT PRIMARY KEY,
+    id_tipo_cliente INT PRIMARY KEY AUTO_INCREMENT,
     tipo VARCHAR(100) NOT NULL UNIQUE
 );
 
 -- Tabla Clientes
 CREATE TABLE IF NOT EXISTS Clientes (
-    id_cliente INT PRIMARY KEY,
+    id_cliente INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(255) NOT NULL,
     telefono VARCHAR(15) CHECK(LENGTH(telefono) >= 7),
     correo VARCHAR(255) CHECK(correo LIKE '%_@__%.__%'),
@@ -279,7 +279,7 @@ CREATE TABLE IF NOT EXISTS Clientes (
 
 -- Tabla Proveedores
 CREATE TABLE IF NOT EXISTS Proveedores (
-    id_proveedor INT PRIMARY KEY,
+    id_proveedor INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(255) NOT NULL,
     telefono VARCHAR(15),
     correo VARCHAR(255),
@@ -289,7 +289,7 @@ CREATE TABLE IF NOT EXISTS Proveedores (
 
 -- Tabla Compras
 CREATE TABLE IF NOT EXISTS Compras (
-    id_compra INT PRIMARY KEY,
+    id_compra INT PRIMARY KEY AUTO_INCREMENT,
     fecha DATE NOT NULL,
     total DECIMAL(10, 2) NOT NULL CHECK(total >= 0),
     id_proveedor INT NOT NULL,
@@ -298,7 +298,7 @@ CREATE TABLE IF NOT EXISTS Compras (
 
 -- Tabla Detalles_compra
 CREATE TABLE IF NOT EXISTS Detalles_compra (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     id_compra INT NOT NULL,
     FOREIGN KEY (id_compra) REFERENCES Compras (id_compra),
     id_activo INT NOT NULL,
@@ -309,13 +309,13 @@ CREATE TABLE IF NOT EXISTS Detalles_compra (
 
 -- Tabla Cargos
 CREATE TABLE IF NOT EXISTS Cargos (
-    id_cargo INT PRIMARY KEY,
+    id_cargo INT PRIMARY KEY AUTO_INCREMENT,
     cargo VARCHAR(100) NOT NULL UNIQUE
 );
 
 -- Tabla Empleados
 CREATE TABLE IF NOT EXISTS Empleados (
-    id_empleado INT PRIMARY KEY,
+    id_empleado INT PRIMARY KEY AUTO_INCREMENT,
     nombre VARCHAR(255) NOT NULL,
     edad INT CHECK(edad >= 18),
     id_cargo INT NOT NULL,
@@ -327,13 +327,13 @@ CREATE TABLE IF NOT EXISTS Empleados (
 
 -- Tabla Dias_semana
 CREATE TABLE IF NOT EXISTS Dias_semana (
-    id_dia INT PRIMARY KEY,
+    id_dia INT PRIMARY KEY AUTO_INCREMENT,
     dia VARCHAR(100) NOT NULL UNIQUE
 );
 
 -- Tabla Horarios
 CREATE TABLE IF NOT EXISTS Horarios (
-    id_horario INT PRIMARY KEY,
+    id_horario INT PRIMARY KEY AUTO_INCREMENT,
     id_empleado INT NOT NULL,
     FOREIGN KEY (id_empleado) REFERENCES Empleados (id_empleado),
     id_dia INT NOT NULL,
@@ -344,7 +344,7 @@ CREATE TABLE IF NOT EXISTS Horarios (
 
 -- Tabla Empleados_en_tarea
 CREATE TABLE IF NOT EXISTS Empleados_en_tarea (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     id_tarea INT NOT NULL,
     FOREIGN KEY (id_tarea) REFERENCES Tareas (id_tarea),
     id_empleado INT NOT NULL,
@@ -353,7 +353,7 @@ CREATE TABLE IF NOT EXISTS Empleados_en_tarea (
 
 -- Tabla Ventas
 CREATE TABLE IF NOT EXISTS Ventas (
-    id_venta INT PRIMARY KEY,
+    id_venta INT PRIMARY KEY AUTO_INCREMENT,
     fecha DATE NOT NULL,
     id_empleado INT NOT NULL,
     FOREIGN KEY (id_empleado) REFERENCES Empleados (id_empleado),
@@ -364,7 +364,7 @@ CREATE TABLE IF NOT EXISTS Ventas (
 
 -- Detalles_venta
 CREATE TABLE IF NOT EXISTS Detalles_venta (
-    id INT PRIMARY KEY,
+    id INT PRIMARY KEY AUTO_INCREMENT,
     id_venta INT NOT NULL,
     FOREIGN KEY (id_venta) REFERENCES Ventas (id_venta),
     id_producto INT NOT NULL,
