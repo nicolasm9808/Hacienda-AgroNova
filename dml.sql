@@ -451,7 +451,7 @@ INSERT INTO Productos_en_locacion (id, id_locacion, id_producto, cantidad) VALUE
 (23, 1, 25, 5),
 (24, 1, 26, 4),
 (25, 2, 27, 2),
-(26, 2, 28, 1),
+(26, 2, 28, 0),
 (27, 3, 29, 3),
 (28, 3, 30, 2);
 
