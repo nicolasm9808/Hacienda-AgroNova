@@ -1,8 +1,8 @@
-# Gestión de una Finca de Producción Agrícola
+# Gestión de Hacienda-AgroNova
 
 ## Descripción del Proyecto
 
-El proyecto **Gestión de una Finca de Producción Agrícola** está diseñado para gestionar y optimizar las operaciones relacionadas con la producción agrícola de una finca. La base de datos creada permite gestionar diversos aspectos de la finca, como la producción de cultivos y animales, el inventario de productos e insumos, la gestión de empleados, ventas, compras y la relación con clientes y proveedores.
+El proyecto **Gestión de Hacienda-AgroNova** está diseñado para gestionar y optimizar las operaciones relacionadas con la producción agrícola de la finca. La base de datos creada permite gestionar diversos aspectos de la finca, como la producción de cultivos y animales, el inventario de productos e insumos, la gestión de empleados, ventas, compras y la relación con clientes y proveedores.
 
 ### Funcionalidades principales:
 - **Gestión de Cultivos y Animales**: Registro de las especies, estado y rendimiento de los cultivos y animales.
