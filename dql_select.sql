@@ -96,7 +96,7 @@ JOIN Proveedores pr ON c.id_proveedor = pr.id_proveedor
 GROUP BY pr.id_proveedor, a.id_activo;
 
 -- 15. Costo promedio de compras por tipo de activo
-SELECT ca.nombre AS categoria, AVG(dc.precio_unitario) AS precio_promedio
+SELECT ca.nombre AS categoria, ROUND(AVG(dc.precio_unitario), 2) AS precio_promedio
 FROM Detalles_compra dc
 JOIN Activos_insumos a ON dc.id_activo = a.id_activo
 JOIN Categorias ca ON a.id_categoria = ca.id_categoria
@@ -149,14 +149,10 @@ GROUP BY e.id_empleado
 ORDER BY tareas_completadas DESC;
 
 -- 22. Salario total mensual por empleado
-SELECT e.nombre AS empleado, 
-       ROUND(e.salario, 2) AS salario, 
-       COUNT(h.id_horario) AS dias_trabajados, 
-       ROUND((e.salario / 30) * COUNT(h.id_horario), 2) AS salario_mensual
+SELECT e.nombre AS empleado, ROUND(e.salario, 2) AS salario, COUNT(h.id_horario) AS dias_trabajados, ROUND((e.salario / 30) * COUNT(h.id_horario), 2) AS salario_mensual
 FROM Empleados e
 JOIN Horarios h ON e.id_empleado = h.id_empleado
 GROUP BY e.id_empleado;
-
 
 -- 23. Empleados con más horas trabajadas en el último mes
 SELECT e.nombre AS empleado, SUM(TIMESTAMPDIFF(HOUR, h.hora_inicio, h.hora_fin)) AS horas_totales
@@ -183,7 +179,7 @@ WHERE e.id_empleado NOT IN (
 );
 
 -- 26. Rendimiento promedio por hectárea de los cultivos por mes
-SELECT DATE_FORMAT(p.fecha, '%Y-%m') AS mes, c.nombre AS cultivo, SUM(cp.id_cultivo) / c.areas_hectareas AS rendimiento_por_hectarea
+SELECT DATE_FORMAT(p.fecha, '%Y-%m') AS mes, c.nombre AS cultivo, ROUND(SUM(cp.id_cultivo) / c.areas_hectareas, 2) AS rendimiento_por_hectarea
 FROM Producciones p
 JOIN Cultivos_para_produccion cp ON p.id_produccion = cp.id_produccion
 JOIN Cultivos c ON cp.id_cultivo = c.id_cultivo
@@ -206,7 +202,7 @@ WHERE cp.id_cultivo = (SELECT id_cultivo FROM Cultivos WHERE nombre = 'Maíz')
 GROUP BY mes;
 
 -- 29. Costo de producción total por hectárea de cultivo
-SELECT c.nombre AS cultivo, SUM(p.costo) / c.areas_hectareas AS costo_por_hectarea
+SELECT c.nombre AS cultivo, ROUND(SUM(p.costo) / c.areas_hectareas, 2) AS costo_por_hectarea
 FROM Producciones p
 JOIN Cultivos_para_produccion cp ON p.id_produccion = cp.id_produccion
 JOIN Cultivos c ON cp.id_cultivo = c.id_cultivo
@@ -226,7 +222,7 @@ JOIN Estados_animales ea ON a.id_estado_animal = ea.id_estado_animal
 GROUP BY e.especie, ea.estado;
 
 -- 32. Edad promedio de los animales por especie
-SELECT e.especie, AVG(a.edad) AS edad_promedio
+SELECT e.especie, ROUND(AVG(a.edad), 2) AS edad_promedio
 FROM Animales a
 JOIN Especies e ON a.id_especie = e.id_especie
 GROUP BY e.especie;
@@ -268,14 +264,14 @@ GROUP BY p.id_producto
 ORDER BY total_ganancia DESC LIMIT 1;
 
 -- 37. Ganancia total por tipo de producto
-SELECT tp.tipo AS tipo_producto, SUM(dv.cantidad * p.precio) AS ganancia_total
+SELECT tp.tipo AS tipo_producto, ROUND(SUM(dv.cantidad * p.precio), 2) AS ganancia_total
 FROM Detalles_venta dv
 JOIN Productos p ON dv.id_producto = p.id_producto
 JOIN Tipos_producto tp ON p.id_tipo_producto = tp.id_tipo_producto
 GROUP BY tp.id_tipo_producto;
 
 -- 38. Promedio de precios por tipo de producto
-SELECT tp.tipo AS tipo_producto, AVG(p.precio) AS precio_promedio
+SELECT tp.tipo AS tipo_producto, ROUND(AVG(p.precio), 2) AS precio_promedio
 FROM Productos p
 JOIN Tipos_producto tp ON p.id_tipo_producto = tp.id_tipo_producto
 GROUP BY tp.id_tipo_producto;
@@ -312,7 +308,7 @@ GROUP BY pr.id_proveedor
 ORDER BY monto_total DESC;
 
 -- 43. Precio promedio de insumos comprados por proveedor
-SELECT pr.nombre AS proveedor, AVG(dc.precio_unitario) AS precio_promedio
+SELECT pr.nombre AS proveedor, ROUND(AVG(dc.precio_unitario), 2) AS precio_promedio
 FROM Detalles_compra dc
 JOIN Compras c ON dc.id_compra = c.id_compra
 JOIN Proveedores pr ON c.id_proveedor = pr.id_proveedor
@@ -322,8 +318,9 @@ GROUP BY pr.id_proveedor;
 SELECT m.descripcion, m.marca, m.modelo, eq.cantidad
 FROM Maquinas m
 JOIN Equipos_de_trabajo eq ON m.id_activo = eq.id_activo
-JOIN Estados est ON eq.id_estado = est.id_estado
+JOIN Estados est ON m.id_estado = est.id_estado
 WHERE est.estado = 'Bueno' AND eq.cantidad > 5;
+
 
 -- 45. Vehículos más utilizados en tareas en el último mes
 SELECT v.marca, v.modelo, COUNT(at.id_tarea) AS veces_utilizado
@@ -342,7 +339,7 @@ GROUP BY mes
 ORDER BY mes DESC;
 
 -- 47. Productos más rentables (precio de venta menos costo de producción)
-SELECT p.nombre AS producto, (p.precio - AVG(pr.costo)) AS margen_rentabilidad
+SELECT p.nombre AS producto, ROUND((p.precio - AVG(pr.costo)), 2) AS margen_rentabilidad
 FROM Productos p
 JOIN Productos_de_produccion pp ON p.id_producto = pp.id_producto
 JOIN Producciones pr ON pp.id_produccion = pr.id_produccion
@@ -355,7 +352,9 @@ FROM Empleados e
 WHERE e.salario > (SELECT AVG(salario) FROM Empleados);
 
 -- 49. Productos con mayor cantidad de ventas y menor stock disponible
-SELECT p.nombre AS producto, SUM(dv.cantidad) AS ventas_totales, pl.cantidad AS stock_disponible
+SELECT p.nombre AS producto, 
+       SUM(dv.cantidad) AS ventas_totales, 
+       MAX(pl.cantidad) AS stock_disponible
 FROM Detalles_venta dv
 JOIN Productos p ON dv.id_producto = p.id_producto
 JOIN Productos_en_locacion pl ON p.id_producto = pl.id_producto
@@ -371,7 +370,7 @@ JOIN Estados est ON eq.id_estado = est.id_estado
 WHERE est.estado = 'Necesita Mantenimiento';
 
 -- 51. Promedio de gastos en compras mensuales
-SELECT DATE_FORMAT(c.fecha, '%Y-%m') AS mes, AVG(c.total) AS promedio_compras
+SELECT DATE_FORMAT(c.fecha, '%Y-%m') AS mes, ROUND(AVG(c.total), 2) AS promedio_compras
 FROM Compras c
 GROUP BY mes;
 
@@ -510,7 +509,7 @@ WHERE v.fecha BETWEEN DATE_SUB(CURRENT_DATE, INTERVAL 6 MONTH) AND CURRENT_DATE
 GROUP BY v.id_venta;
 
 -- 69. Promedio de ingresos diarios por ventas en el último mes
-SELECT AVG(daily.total) AS promedio_diario
+SELECT ROUND(AVG(daily.total), 2) AS promedio_diario
 FROM (
       SELECT DATE(v.fecha) AS dia, SUM(v.total) AS total
       FROM Ventas v
@@ -519,7 +518,9 @@ FROM (
 ) daily;
 
 -- 70. Porcentaje de ventas por cliente en el último año
-SELECT c.nombre AS cliente, (SUM(v.total) / (SELECT SUM(total) FROM Ventas WHERE fecha BETWEEN DATE_SUB(CURRENT_DATE, INTERVAL 1 YEAR) AND CURRENT_DATE)) * 100 AS porcentaje_ventas
+SELECT c.nombre AS cliente, ROUND((SUM(v.total) / (SELECT SUM(total) 
+FROM Ventas 
+WHERE fecha BETWEEN DATE_SUB(CURRENT_DATE, INTERVAL 1 YEAR) AND CURRENT_DATE)) * 100, 2) AS porcentaje_ventas
 FROM Ventas v
 JOIN Clientes c ON v.id_cliente = c.id_cliente
 WHERE v.fecha BETWEEN DATE_SUB(CURRENT_DATE, INTERVAL 1 YEAR) AND CURRENT_DATE
@@ -611,7 +612,7 @@ GROUP BY p.id_proveedor, mes
 ORDER BY monto_total DESC;
 
 -- 82. Productos con más ventas en relación al stock actual
-SELECT p.nombre AS producto, SUM(dv.cantidad) AS ventas_totales, (SUM(dv.cantidad) / SUM(pl.cantidad)) * 100 AS porcentaje_ventas_vs_stock
+SELECT p.nombre AS producto, SUM(dv.cantidad) AS ventas_totales, ROUND((SUM(dv.cantidad) / SUM(pl.cantidad)) * 100, 2) AS porcentaje_ventas_vs_stock
 FROM Detalles_venta dv
 JOIN Productos p ON dv.id_producto = p.id_producto
 JOIN Productos_en_locacion pl ON p.id_producto = pl.id_producto
@@ -628,7 +629,7 @@ GROUP BY e.id_empleado
 ORDER BY tareas_completadas DESC LIMIT 5;
 
 -- 84. Ingresos anuales totales agrupados por cliente
-SELECT c.nombre AS cliente, SUM(v.total) AS total_ingresos
+SELECT c.nombre AS cliente, ROUND(SUM(v.total), 2) AS total_ingresos
 FROM Ventas v
 JOIN Clientes c ON v.id_cliente = c.id_cliente
 WHERE YEAR(v.fecha) = YEAR(CURRENT_DATE)
@@ -662,12 +663,14 @@ GROUP BY v.id_vehiculo
 ORDER BY veces_utilizado DESC;
 
 -- 88. Cultivos con mayor producción por hectárea en el último año
-SELECT c.nombre AS cultivo, SUM(cp.id_cultivo) / c.areas_hectareas AS produccion_por_hectarea
+SELECT c.nombre AS cultivo, ROUND(SUM(cp.id_cultivo) / c.areas_hectareas, 2) AS produccion_por_hectarea
 FROM Cultivos_para_produccion cp
 JOIN Cultivos c ON cp.id_cultivo = c.id_cultivo
 WHERE cp.id_produccion IN (
-    SELECT p.id_produccion FROM Producciones p WHERE YEAR(p.fecha) = YEAR(CURRENT_DATE)
-)
+      SELECT p.id_produccion 
+      FROM Producciones p 
+      WHERE YEAR(p.fecha) = YEAR(CURRENT_DATE)
+      )
 GROUP BY c.id_cultivo
 ORDER BY produccion_por_hectarea DESC;
 
@@ -682,9 +685,27 @@ GROUP BY e.especie
 ORDER BY animales_producidos DESC;
 
 -- 90. Productos con margen de ganancia superior al promedio
-SELECT p.nombre, p.precio, (p.precio - (SELECT AVG(pr.costo) FROM Producciones pr WHERE pr.id_produccion IN (SELECT id_produccion FROM Productos_de_produccion WHERE id_producto = p.id_producto))) AS margen_ganancia
+SELECT p.nombre, ROUND(p.precio, 2) AS precio, ROUND(p.precio - (
+      SELECT AVG(pr.costo)
+      FROM Producciones pr
+      WHERE pr.id_produccion IN (
+            SELECT pdp.id_produccion
+            FROM Productos_de_produccion pdp
+            WHERE pdp.id_producto = p.id_producto)
+), 2) AS margen_ganancia
 FROM Productos p
-HAVING margen_ganancia > (SELECT AVG(p2.precio - (SELECT AVG(pr2.costo) FROM Producciones pr2 WHERE pr2.id_produccion IN (SELECT id_produccion FROM Productos_de_produccion WHERE id_producto = p2.id_producto))) FROM Productos p2);
+HAVING margen_ganancia > (
+      SELECT ROUND(AVG(
+            p2.precio - (
+            SELECT AVG(pr2.costo)
+            FROM Producciones pr2
+            WHERE pr2.id_produccion IN (
+                  SELECT pdp2.id_produccion
+                  FROM Productos_de_produccion pdp2
+                  WHERE pdp2.id_producto = p2.id_producto)
+      )), 2)
+FROM Productos p2
+);
 
 -- 91. Productos con mayor demanda en relación a su precio
 SELECT p.nombre, p.precio, SUM(dv.cantidad) AS total_vendido
@@ -694,14 +715,27 @@ GROUP BY p.id_producto
 HAVING total_vendido / p.precio > 10;
 
 -- 92. Clientes con mayor volumen de compras en relación al total de ventas
-SELECT c.nombre, (SUM(v.total) / (SELECT SUM(v2.total) FROM Ventas v2 WHERE YEAR(v2.fecha) = YEAR(CURRENT_DATE))) * 100 AS porcentaje_total
+SELECT c.nombre, ROUND((SUM(v.total) / (
+	SELECT SUM(v2.total) 
+	FROM Ventas v2 
+	WHERE YEAR(v2.fecha) = YEAR(CURRENT_DATE) 
+)) * 100, 2) AS porcentaje_total
 FROM Clientes c
 JOIN Ventas v ON c.id_cliente = v.id_cliente
 WHERE YEAR(v.fecha) = YEAR(CURRENT_DATE)
 GROUP BY c.id_cliente;
 
 -- 93. Productos más rentables por unidad en el último trimestre
-SELECT p.nombre, (p.precio - (SELECT AVG(pr.costo) FROM Producciones pr WHERE pr.id_produccion IN (SELECT id_produccion FROM Productos_de_produccion WHERE id_producto = p.id_producto))) AS rentabilidad_por_unidad
+SELECT 
+    p.nombre, 
+    ROUND(p.precio - (
+        SELECT AVG(pr.costo) 
+        FROM Producciones pr 
+        WHERE pr.id_produccion IN (
+            SELECT pdp.id_produccion 
+            FROM Productos_de_produccion pdp 
+            WHERE pdp.id_producto = p.id_producto)
+	), 2) AS rentabilidad_por_unidad
 FROM Productos p
 JOIN Detalles_venta dv ON p.id_producto = dv.id_producto
 JOIN Ventas v ON dv.id_venta = v.id_venta
@@ -720,7 +754,12 @@ GROUP BY e.id_empleado
 ORDER BY ventas DESC, tareas_completadas DESC;
 
 -- 95. Proveedores con mayor porcentaje de compras respecto al total
-SELECT p.nombre AS proveedor, (SUM(c.total) / (SELECT SUM(c2.total) FROM Compras c2 WHERE YEAR(c2.fecha) = YEAR(CURRENT_DATE))) * 100 AS porcentaje_total
+SELECT p.nombre AS proveedor, 
+      ROUND((SUM(c.total) / (
+            SELECT SUM(c2.total) 
+            FROM Compras c2 
+            WHERE YEAR(c2.fecha) = YEAR(CURRENT_DATE)
+      )) * 100, 2) AS porcentaje_total
 FROM Proveedores p
 JOIN Compras c ON p.id_proveedor = c.id_proveedor
 GROUP BY p.id_proveedor
@@ -735,7 +774,12 @@ GROUP BY p.id_producto
 HAVING dias_restantes < 30;
 
 -- 97. Empleados con salarios más altos en relación al promedio
-SELECT e.nombre, e.salario, (e.salario / (SELECT AVG(salario) FROM Empleados)) * 100 AS porcentaje_sobre_promedio
+SELECT e.nombre, 
+      ROUND(e.salario, 2) AS salario, 
+      ROUND((e.salario / (
+            SELECT AVG(salario) 
+            FROM Empleados
+      )) * 100, 2) AS porcentaje_sobre_promedio
 FROM Empleados e
 WHERE e.salario > (SELECT AVG(salario) FROM Empleados);
 
