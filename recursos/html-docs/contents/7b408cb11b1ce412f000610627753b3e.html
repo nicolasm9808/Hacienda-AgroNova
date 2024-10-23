@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Compras</title>
+    <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic|Source+Code+Pro:300,400,700' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="../assets/css/bootstrap.css">
+<link rel="stylesheet" href="../assets/css/jquery.bonsai.css">
+<link rel="stylesheet" href="../assets/css/main.css">
+<link rel="stylesheet" href="../assets/icon-font/icons.css">
+<script type="text/javascript" src="../assets/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript" src="../assets/js/bootstrap.js"></script>
+<script type="text/javascript" src="../assets/js/jquery.bonsai.js"></script>
+<script type="text/javascript" src="../assets/js/imageMapResizer.min.js"></script>
+
+  </head>
+  <body>
+    <div>
+
+      <!-- Name Title -->
+
+      <h1>Compras</h1>
+
+      <!-- Type and Stereotype -->
+
+      <section style="margin-top: .5em;">
+        <span class="alert alert-info">
+          <span class="node-icon staruml-icon icon-ERDEntity"></span>
+          ERDEntity
+        </span>
+        
+      </section>
+
+      <!-- Path -->
+
+      <section style="margin-top: 10px">
+        
+        
+        
+          
+          <span class="label label-info"><a href='cf9c8b720f3815adeccaf3ef6e48c6c4.html'><span class='node-icon staruml-icon icon-Project'></span>Hacienda AgroNova</a></span>
+        
+          <span>::</span>
+          <span class="label label-info"><a href='e587301b5167b5dfbd29791a5770756c.html'><span class='node-icon staruml-icon icon-ERDDataModel'></span>DB Hacienda AgroNova</a></span>
+        
+          <span>::</span>
+          <span class="label label-info"><a href='7b408cb11b1ce412f000610627753b3e.html'><span class='node-icon staruml-icon icon-ERDEntity'></span>Compras</a></span>
+        
+      </section>
+
+      <!-- Diagram -->
+
+      
+
+      <!-- Description -->
+
+      
+      <section>
+        <h3>Description</h3>
+        <div>
+          
+            <p>Esta entidad almacena el registro de cada compra realizada en la Hacienda.</p>
+          
+        </div>
+      </section>
+      
+
+      <!-- Specification -->
+
+      
+
+      <!-- Directed Relationship -->
+
+      
+
+      <!-- Undirected Relationship -->
+
+      
+
+      <!-- Classifier -->
+
+      
+
+      <!-- Interface -->
+
+      
+
+      <!-- Component -->
+
+      
+
+      <!-- Node -->
+
+      
+
+      <!-- Actor -->
+
+      
+
+      <!-- Use Case -->
+
+      
+
+      <!-- Template Parameters -->
+
+      
+
+      <!-- Literals -->
+
+      
+
+      <!-- Attributes -->
+
+      
+
+      <!-- Operations -->
+
+      
+
+      <!-- Receptions -->
+
+      
+
+      <!-- Extension Points -->
+
+      
+
+      <!-- Parameters -->
+
+      
+
+      <!-- Diagrams -->
+
+      
+      
+
+      <!-- Behavior -->
+
+      
+
+      <!-- Action -->
+
+      
+
+      <!-- Interaction -->
+
+      
+
+      <!-- CombinedFragment -->
+
+      
+
+      <!-- Activity -->
+
+      
+
+      <!-- State Machine -->
+
+      
+
+      <!-- State Machine -->
+
+      
+
+      <!-- State -->
+
+      
+
+      <!-- Vertex -->
+
+      
+
+      <!-- Transition -->
+
+      
+
+      <!-- Data Model (ERD) -->
+
+      
+
+      <!-- Columns (ERD) -->
+
+      
+      <section>
+        <h3>Columns</h3>
+        
+        <table class="table table-striped table-bordered">
+          <tr>
+            <th width="20%">Name</th>
+            <th width="20%">Type</th>
+            <th width="10%">Primary Key</th>
+            <th width="10%">Foreign Key</th>
+            <th width="20%">Reference To</th>
+            <th width="10%">Nullable</th>
+            <th width="10%">Unique</th>
+          </tr>
+          
+          <tr>
+            <td><a href="757c3c0cc4d6daf6fa0a29611e4c3393.html">id_compra</a></td>
+            <td>INTEGER</td>
+            <td><span class='label label-info'>true</span></td>
+            <td><span class='label label-info'>false</span></td>
+            <td>
+              
+              <span class='label label-info'>null</span>
+            </td>
+            <td><span class='label label-info'>false</span></td>
+            <td><span class='label label-info'>false</span></td>
+          </tr>
+          
+          <tr>
+            <td><a href="d8024d82cdaf4d98ca0594e946471d28.html">fecha</a></td>
+            <td>DATE</td>
+            <td><span class='label label-info'>false</span></td>
+            <td><span class='label label-info'>false</span></td>
+            <td>
+              
+              <span class='label label-info'>null</span>
+            </td>
+            <td><span class='label label-info'>true</span></td>
+            <td><span class='label label-info'>false</span></td>
+          </tr>
+          
+          <tr>
+            <td><a href="c550e840a68a196c89adec98bd3239e7.html">total</a></td>
+            <td>DECIMAL</td>
+            <td><span class='label label-info'>false</span></td>
+            <td><span class='label label-info'>false</span></td>
+            <td>
+              
+              <span class='label label-info'>null</span>
+            </td>
+            <td><span class='label label-info'>true</span></td>
+            <td><span class='label label-info'>false</span></td>
+          </tr>
+          
+          <tr>
+            <td><a href="0d304bdbee9520844b2bca95e2b8751b.html">id_proveedor</a></td>
+            <td>INTEGER</td>
+            <td><span class='label label-info'>false</span></td>
+            <td><span class='label label-info'>true</span></td>
+            <td>
+              
+              <span class='label label-info'>null</span>
+            </td>
+            <td><span class='label label-info'>true</span></td>
+            <td><span class='label label-info'>false</span></td>
+          </tr>
+          
+        </table>                
+      </section>
+      
+
+      <!-- Related Entities (ERD) -->
+
+      
+      <section>
+        <h3>Related Entities</h3>
+        
+        <table class="table table-striped table-bordered">
+          <tr>
+            <th width="25%">Entity</th>
+            <th width="25%">Cardinality</th>
+            <th width="25%">Reference Name</th>
+            <th width="25%">Relationship</th>
+          </tr>
+          
+          
+          <tr>
+            <td><a href='555f5fbbfe97f74db464ea7fd559d990.html'><span class='node-icon staruml-icon icon-ERDEntity'></span>Proveedores</a></td>
+            <td>1</td>
+            <td></td>
+            <td><a href='c237cece5a674e9fd31577b77fc4f806.html'><span class='node-icon staruml-icon icon-ERDRelationship'></span>(Proveedores—Compras)</a></td>
+          </tr>
+          
+          
+          <tr>
+            <td><a href='7b408cb11b1ce412f000610627753b3e.html'><span class='node-icon staruml-icon icon-ERDEntity'></span>Compras</a></td>
+            <td>0..*</td>
+            <td></td>
+            <td><a href='8d6a2458ca34d1e9dfc2f2da3d2f3997.html'><span class='node-icon staruml-icon icon-ERDRelationship'></span>(Compras—Compras)</a></td>
+          </tr>
+          
+          
+          <tr>
+            <td><a href='3e53c957c989b781b3f7c27094e424fd.html'><span class='node-icon staruml-icon icon-ERDEntity'></span>Activos-insumos</a></td>
+            <td>0..*</td>
+            <td></td>
+            <td><a href='a72f6ccb6a38555d5f74eaac00bdf2e6.html'><span class='node-icon staruml-icon icon-ERDRelationship'></span>(Compras—Activos-insumos)</a></td>
+          </tr>
+          
+          
+          <tr>
+            <td><a href='c5c5016c27c32d3c6acf7ee6dd5854d8.html'><span class='node-icon staruml-icon icon-ERDEntity'></span>Detalles_compra</a></td>
+            <td>0..*</td>
+            <td></td>
+            <td><a href='7b378fc7a14b5b7658c08fc5ea7bffdf.html'><span class='node-icon staruml-icon icon-ERDRelationship'></span>(Compras—Detalles_compra)</a></td>
+          </tr>
+          
+          
+          <tr>
+            <td><a href='3e53c957c989b781b3f7c27094e424fd.html'><span class='node-icon staruml-icon icon-ERDEntity'></span>Activos-insumos</a></td>
+            <td>0..*</td>
+            <td></td>
+            <td><a href='8cc455ae9aacf0e0758ceec6edc61753.html'><span class='node-icon staruml-icon icon-ERDRelationship'></span>(Activos-insumos—Compras)</a></td>
+          </tr>
+          
+        </table>                
+      </section>
+      
+
+      <!-- Data Flows (DFD) -->
+
+      
+
+      <!-- Flows (Flowchart) -->
+
+      
+
+      <!-- Properties -->
+
+      <section>
+        <h3>Properties</h3>
+        
+        <table class="table table-striped table-bordered">
+    <tr>
+        <th width="50%">Name</th>
+        <th width="50%">Value</th>
+    </tr>
+    
+    
+    
+    
+    
+    
+    
+    <tr>
+        <td>name</td>
+        <td>Compras</td>
+    </tr>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+</table>                
+
+      </section>
+
+      <!-- Tags -->
+
+      
+
+      <!-- Constraints, Dependencies, Dependants -->
+
+      
+
+      <!-- Relationships -->
+
+      
+      
+<section class="element-list">
+    <h3>Relationships</h3>
+    <ul class="nav nav-list">
+        
+        <li><a href='c237cece5a674e9fd31577b77fc4f806.html'><span class='node-icon staruml-icon icon-ERDRelationship'></span>(Proveedores—Compras)</a></li>
+        
+        <li><a href='8d6a2458ca34d1e9dfc2f2da3d2f3997.html'><span class='node-icon staruml-icon icon-ERDRelationship'></span>(Compras—Compras)</a></li>
+        
+        <li><a href='a72f6ccb6a38555d5f74eaac00bdf2e6.html'><span class='node-icon staruml-icon icon-ERDRelationship'></span>(Compras—Activos-insumos)</a></li>
+        
+        <li><a href='7b378fc7a14b5b7658c08fc5ea7bffdf.html'><span class='node-icon staruml-icon icon-ERDRelationship'></span>(Compras—Detalles_compra)</a></li>
+        
+        <li><a href='8cc455ae9aacf0e0758ceec6edc61753.html'><span class='node-icon staruml-icon icon-ERDRelationship'></span>(Activos-insumos—Compras)</a></li>
+        
+    </ul>
+</section>
+
+
+
+      <!-- Owned Elements -->
+
+      
+      
+<section class="element-list">
+    <h3>Owned Elements</h3>
+    <ul class="nav nav-list">
+        
+        <li><a href='8d6a2458ca34d1e9dfc2f2da3d2f3997.html'><span class='node-icon staruml-icon icon-ERDRelationship'></span>(Compras—Compras)</a></li>
+        
+        <li><a href='a72f6ccb6a38555d5f74eaac00bdf2e6.html'><span class='node-icon staruml-icon icon-ERDRelationship'></span>(Compras—Activos-insumos)</a></li>
+        
+        <li><a href='7b378fc7a14b5b7658c08fc5ea7bffdf.html'><span class='node-icon staruml-icon icon-ERDRelationship'></span>(Compras—Detalles_compra)</a></li>
+        
+    </ul>
+</section>
+
+
+
+      <!-- Image Map Resizer (https://github.com/davidjbradshaw/image-map-resizer) -->
+      <script>
+      imageMapResize();
+      </script>
+    </div>
+  </body>
+</html>

@@ -62,6 +62,9 @@ mysql -u usuario -p Hacienda_AgroNova < path/to/dql_eventos.sql
 
 ## Estructura de la Base de Datos
 
+### Diagrama
+<img src="recursos/diagrama.jpg" alt="Diagrama de relación de entidad" width="auto" />
+
 ### Tablas principales:
 - **Empleados**: Gestiona la información del personal de la finca, incluyendo salarios y cargos.
 - **Ventas**: Registro de las ventas realizadas a clientes.
