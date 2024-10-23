@@ -426,10 +426,10 @@ INSERT INTO Locaciones_almacenamiento (id_locacion, nombre, capacidad_maxima, ca
 
 -- Inserciones para la tabla Productos_en_locación
 INSERT INTO Productos_en_locacion (id, id_locacion, id_producto, cantidad) VALUES
-(1, 1, 1, 300),
-(2, 1, 2, 150),
-(3, 1, 4, 500),
-(4, 2, 3, 200),
+(1, 1, 1, 2000),
+(2, 1, 2, 1200),
+(3, 1, 4, 800),
+(4, 2, 3, 1800),
 (5, 2, 5, 300),
 (6, 2, 6, 250),
 (7, 3, 11, 100),
@@ -437,7 +437,7 @@ INSERT INTO Productos_en_locacion (id, id_locacion, id_producto, cantidad) VALUE
 (9, 4, 9, 600),
 (10, 4, 10, 400),
 (11, 5, 13, 500),
-(12, 5, 14, 350),
+(12, 5, 14, 800),
 (13, 6, 15, 200),
 (14, 6, 16, 100),
 (15, 7, 17, 150),
@@ -478,14 +478,14 @@ INSERT INTO Estados_tarea (id_estado, estado) VALUES
 
 -- Inserciones para la tabla Tareas
 INSERT INTO Tareas (id_tarea, descripcion_tarea, id_tipo_tarea, fecha, id_estado) VALUES
-(1, 'Siembra de maíz', 1, '2024-03-01', 1),
-(2, 'Cosecha de aguacates', 2, '2024-06-15', 2),
-(3, 'Riego de cultivos', 3, '2024-04-10', 1),
-(4, 'Fertilización de campo', 4, '2024-04-20', 3),
-(5, 'Mantenimiento de maquinaria', 5, '2024-05-05', 1),
+(1, 'Siembra de maíz', 1, '2024-10-01', 1),
+(2, 'Cosecha de aguacates', 2, '2024-10-05', 2),
+(3, 'Riego de cultivos', 3, '2024-10-10', 1),
+(4, 'Fertilización de campo', 4, '2024-10-12', 3),
+(5, 'Mantenimiento de maquinaria', 5, '2024-10-20', 1),
 (6, 'Tratamiento de plagas', 6, '2024-05-15', 2),
 (7, 'Recolección de frutas', 10, '2024-07-01', 3),
-(8, 'Almacenamiento de leche', 8, '2024-07-10', 3),
+(8, 'Almacenamiento de leche', 8, '2024-10-25', 3),
 (9, 'Transporte de productos', 9, '2024-07-15', 2),
 (10, 'Cosecha de hortalizas', 2, '2024-06-25', 1),
 (11, 'Siembra de frijoles', 1, '2024-04-05', 3),
@@ -527,7 +527,9 @@ INSERT INTO Tareas (id_tarea, descripcion_tarea, id_tipo_tarea, fecha, id_estado
 (47, 'Transporte de hierbas', 9, '2024-09-25', 2),
 (48, 'Fertilización de hierbas', 4, '2024-09-28', 1),
 (49, 'Control de plagas en hierbas', 7, '2024-09-30', 2),
-(50, 'Mantenimiento de cultivos de hierbas', 5, '2024-10-01', 1);
+(50, 'Mantenimiento de cultivos de hierbas', 5, '2024-10-01', 1),
+(51, 'Siembra de guisantes', 1, '2024-09-10', 1),
+(52, 'Riego de guisantes', 3, '2024-09-15', 1);
 
 -- Inserciones para la tabla Tareas_de_producción
 INSERT INTO Tareas_de_producción (id, id_producción, id_tarea) VALUES
@@ -728,8 +730,8 @@ INSERT INTO Tipos_insumo (id_tipo_insumo, tipo) VALUES
 
 -- Inserciones para la tabla Insumos
 INSERT INTO Insumos (id_insumo, id_activo, id_unidad_medida, id_tipo_insumo, fecha_vencimiento, cantidad) VALUES
-(1, 6, 1, 1, '2025-12-31', 100),
-(2, 7, 1, 1, '2025-12-31', 50),
+(1, 6, 1, 1, '2025-12-31', 2),
+(2, 7, 1, 1, '2025-12-31', 1),
 (3, 8, 1, 2, '2025-12-31', 200),
 (4, 9, 1, 4, '2025-12-31', 150),
 (5, 10, 1, 6, '2025-12-31', 120),
@@ -741,7 +743,7 @@ INSERT INTO Insumos (id_insumo, id_activo, id_unidad_medida, id_tipo_insumo, fec
 
 -- Inserciones en la tabla Estados
 INSERT INTO Estados (id_estado, estado) VALUES
-(1, 'Disponible'),
+(1, 'Bueno'),
 (2, 'Ocupado'),
 (3, 'Mantenimiento'),
 (4, 'Fuera de servicio');
@@ -750,14 +752,19 @@ INSERT INTO Estados (id_estado, estado) VALUES
 INSERT INTO Equipos_de_trabajo (id_equipo, id_activo, descripcion, id_estado, cantidad) VALUES
 (1, 13, 'Martillo de acero', 1, 20),
 (2, 14, 'Pico de acero', 1, 15),
-(3, 15, 'Azada de jardín', 1, 10),
+(3, 15, 'Azada de jardín', 3, 10),
 (4, 16, 'Carretilla de carga', 1, 12),
 (5, 17, 'Guantes de jardinería', 1, 50),
 (6, 34, 'Taladro eléctrico', 1, 8),
 (7, 35, 'Sierra de mano', 1, 5),
 (8, 36, 'Cinta métrica', 1, 30),
 (9, 37, 'Escalera de aluminio', 1, 2),
-(10, 38, 'Carro de mano', 1, 4);
+(10, 38, 'Carro de mano', 1, 4),
+(11, 12, 'Cosechadora', 1, 3),
+(12, 13, 'Rotavator', 1, 5),
+(13, 14, 'Aspiradora de hojas', 1, 4),
+(14, 15, 'Pulverizador', 1, 2),
+(15, 16, 'Carretilla de mano', 1, 8);
 
 -- Inserciones para la tabla Máquinas
 INSERT INTO Maquinas (id_maquina, id_activo, descripcion, marca, modelo, id_estado) VALUES
@@ -1386,4 +1393,15 @@ INSERT INTO Detalles_venta (id, id_venta, id_producto, cantidad) VALUES
 (47, 45, 7, 10),
 (48, 46, 8, 5),
 (49, 47, 9, 3),
-(50, 48, 10, 6);
+(50, 48, 10, 6),
+(51, 1, 4, 30),  
+(52, 1, 5, 50), 
+(53, 2, 6, 15),    
+(54, 2, 8, 25),    
+(55, 3, 10, 20),   
+(56, 4, 7, 12),    
+(57, 5, 2, 15),    
+(58, 6, 3, 8),     
+(59, 6, 9, 10),    
+(60, 7, 1, 20),    
+(61, 7, 4, 5);     

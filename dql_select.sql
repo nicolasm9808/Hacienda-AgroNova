@@ -129,14 +129,10 @@ JOIN Categorias ca ON a.id_categoria = ca.id_categoria
 JOIN Compras c ON dc.id_compra = c.id_compra
 GROUP BY mes, ca.id_categoria;
 
--- 20. Empleados con más tareas asignadas en el último mes
-SELECT e.nombre AS empleado, COUNT(te.id_tarea) AS tareas_asignadas
-FROM Empleados_en_tarea te
-JOIN Empleados e ON te.id_empleado = e.id_empleado
-JOIN Tareas t ON te.id_tarea = t.id_tarea
-WHERE MONTH(t.fecha) = MONTH(CURRENT_DATE) AND YEAR(t.fecha) = YEAR(CURRENT_DATE)
-GROUP BY e.id_empleado
-ORDER BY tareas_asignadas DESC;
+-- 20. Costo total de producción por mes.
+SELECT DATE_FORMAT(p.fecha, '%Y-%m') AS mes, SUM(p.costo) AS costo_total
+FROM Producciones p
+GROUP BY mes;
 
 -- 21. Desempeño mensual de empleados por tareas completadas
 SELECT e.nombre AS empleado, COUNT(t.id_tarea) AS tareas_completadas
@@ -332,11 +328,23 @@ GROUP BY v.id_vehiculo
 ORDER BY veces_utilizado DESC;
 
 -- 46. Beneficio neto mensual (ventas menos costos de producción y compras)
-SELECT DATE_FORMAT(v.fecha, '%Y-%m') AS mes, (SUM(v.total) - (SELECT SUM(p.costo) 
-FROM Producciones p WHERE DATE_FORMAT(p.fecha, '%Y-%m') = mes)- (SELECT SUM(c.total) FROM Compras c WHERE DATE_FORMAT(c.fecha, '%Y-%m') = mes)) AS beneficio_neto
+SELECT 
+    DATE_FORMAT(v.fecha, '%Y-%m') AS mes, 
+    GREATEST(
+        0, 
+        (SUM(v.total) 
+        - (SELECT IFNULL(SUM(p.costo), 0) 
+           FROM Producciones p 
+           WHERE DATE_FORMAT(p.fecha, '%Y-%m') = mes) 
+        - (SELECT IFNULL(SUM(c.total), 0) 
+           FROM Compras c 
+           WHERE DATE_FORMAT(c.fecha, '%Y-%m') = mes)
+        )
+    ) AS beneficio_neto
 FROM Ventas v
 GROUP BY mes
 ORDER BY mes DESC;
+
 
 -- 47. Productos más rentables (precio de venta menos costo de producción)
 SELECT p.nombre AS producto, ROUND((p.precio - AVG(pr.costo)), 2) AS margen_rentabilidad
@@ -766,12 +774,14 @@ GROUP BY p.id_proveedor
 ORDER BY porcentaje_total DESC;
 
 -- 96. Productos en riesgo de agotarse en los próximos 30 días (considerando el consumo promedio)
-SELECT p.nombre, pl.cantidad AS stock_disponible, AVG(dv.cantidad) AS consumo_promedio_diario, (pl.cantidad / AVG(dv.cantidad)) AS dias_restantes
+SELECT p.nombre, SUM(pl.cantidad) AS stock_disponible, (SUM(dv.cantidad) / COUNT(DISTINCT DATE(v.fecha))) AS consumo_promedio_diario, (SUM(pl.cantidad) / (SUM(dv.cantidad) / COUNT(DISTINCT DATE(v.fecha)))) AS dias_restantes
 FROM Productos p
 JOIN Productos_en_locacion pl ON p.id_producto = pl.id_producto
 JOIN Detalles_venta dv ON p.id_producto = dv.id_producto
+JOIN Ventas v ON dv.id_venta = v.id_venta
 GROUP BY p.id_producto
 HAVING dias_restantes < 30;
+
 
 -- 97. Empleados con salarios más altos en relación al promedio
 SELECT e.nombre, 
@@ -801,4 +811,21 @@ JOIN Detalles_venta dv ON p.id_producto = dv.id_producto
 GROUP BY c.id_cultivo
 ORDER BY ganancia_neta DESC;
 
+-- 100. Productos más rentables por unidad en el último año
+SELECT 
+    p.nombre, 
+    ROUND(p.precio - (
+      SELECT AVG(pr.costo) 
+      FROM Producciones pr 
+      WHERE pr.id_produccion IN (
+            SELECT pdp.id_produccion 
+            FROM Productos_de_produccion pdp
+            WHERE pdp.id_producto = p.id_producto)
+            AND pr.fecha BETWEEN DATE_SUB(CURRENT_DATE, INTERVAL 1 YEAR) AND CURRENT_DATE
+      ), 2) AS rentabilidad_por_unidad
+      FROM Productos p
+      JOIN Detalles_venta dv ON p.id_producto = dv.id_producto
+      JOIN Ventas v ON dv.id_venta = v.id_venta
+      GROUP BY p.id_producto
+      ORDER BY rentabilidad_por_unidad DESC;
 
