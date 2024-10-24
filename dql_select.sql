@@ -138,12 +138,16 @@ FROM (
       GROUP BY dia
 ) daily;
 
--- 16. Costo total de compras por mes
-SELECT mes, 
-       (SELECT SUM(c.total) 
-        FROM Compras c 
-        WHERE DATE_FORMAT(c.fecha, '%Y-%m') = mes) AS costo_total_compras
-FROM (SELECT DISTINCT DATE_FORMAT(c.fecha, '%Y-%m') AS mes FROM Compras c) AS meses;
+-- 16. Clientes con mayor volumen de compras en relación al total de ventas
+SELECT c.nombre, ROUND((SUM(v.total) / (
+	SELECT SUM(v2.total) 
+	FROM Ventas v2 
+	WHERE YEAR(v2.fecha) = YEAR(CURRENT_DATE) 
+)) * 100, 2) AS porcentaje_total
+FROM Clientes c
+JOIN Ventas v ON c.id_cliente = v.id_cliente
+WHERE YEAR(v.fecha) = YEAR(CURRENT_DATE)
+GROUP BY c.id_cliente;
 
 -- 17. Costos operativos totales (producción + compras) por mes
 SELECT prod.mes, (prod.costo_total + comp.costo_total_compras) AS costo_operativo_total
@@ -739,16 +743,10 @@ FROM Especies es
 LEFT JOIN Animales a ON es.id_especie = a.id_especie 
 GROUP BY es.especie;
 
--- 92. Clientes con mayor volumen de compras en relación al total de ventas
-SELECT c.nombre, ROUND((SUM(v.total) / (
-	SELECT SUM(v2.total) 
-	FROM Ventas v2 
-	WHERE YEAR(v2.fecha) = YEAR(CURRENT_DATE) 
-)) * 100, 2) AS porcentaje_total
-FROM Clientes c
-JOIN Ventas v ON c.id_cliente = v.id_cliente
-WHERE YEAR(v.fecha) = YEAR(CURRENT_DATE)
-GROUP BY c.id_cliente;
+-- 92. Empleados y sus Horarios
+SELECT e.nombre AS Empleado, h.hora_inicio, h.hora_fin
+FROM Empleados e
+JOIN Horarios h ON e.id_empleado = h.id_empleado;
 
 -- 93. Productos más rentables por unidad en el último trimestre
 SELECT 
