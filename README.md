@@ -107,21 +107,149 @@ WHERE cantidad <= 10;
 
 ## Procedimientos, Funciones, Triggers y Eventos
 
-### Procedimientos:
-- **`ProcesarVenta`**: Registra una venta y actualiza el inventario de productos automáticamente.
-- **`RegistrarProveedor`**: Inserta un nuevo proveedor en la base de datos.
-  
-### Funciones:
-- **`RendimientoPromedioHectarea`**: Calcula el rendimiento promedio por hectárea para un cultivo específico.
-- **`CostoOperativoTotal`**: Calcula el costo operativo total de la finca en un periodo de tiempo.
+## Procedimientos Almacenados
 
-### Triggers:
-- **`ActualizarInventarioVenta`**: Resta automáticamente el inventario de productos cuando se realiza una venta.
-- **`RegistrarCambioSalario`**: Registra cambios en el salario de los empleados en un historial.
+Los procedimientos almacenados en este proyecto automatizan tareas importantes como la gestión de ventas, la producción, la asignación de insumos y el control de proveedores.
 
-### Eventos:
-- **`GenerarReporteMensualVentas`**: Genera un reporte mensual de ventas.
-- **`ActualizarCapacidadLocacionesSemanal`**: Actualiza la capacidad disponible de las locaciones semanalmente.
+### Descripción de Procedimientos:
+1. **`ProcesarVenta`**: Registra una nueva venta, actualiza los detalles de los productos vendidos y reduce automáticamente el inventario.
+2. **`RegistrarProveedor`**: Inserta nuevos proveedores con información clave como nombre, teléfono, correo y ubicación.
+3. **`RegistrarEmpleado`**: Inserta un nuevo empleado con sus datos básicos y posición dentro de la finca.
+4. **`RegistrarMantenimientoEquipo`**: Registra el mantenimiento de un equipo de trabajo y actualiza su estado a "En mantenimiento".
+5. **`RegistrarCompra`**: Registra una compra realizada a un proveedor, actualiza el inventario y almacena los detalles de la compra.
+6. **`RegistrarProduccionCultivo`**: Inserta un registro de un cultivo en producción, registrando su costo y la fecha de siembra.
+7. **`ActualizarEstadoMaquina`**: Actualiza el estado de una máquina específica, dependiendo de su disponibilidad o mantenimiento.
+8. **`ActualizarInventarioProducto`**: Actualiza la cantidad de un producto en el inventario.
+9. **`AsignarInsumosATarea`**: Registra los insumos asignados a una tarea agrícola específica.
+10. **`AsignarVehiculoATarea`**: Inserta un registro que asigna un vehículo específico a una tarea.
+11. **`RegistrarTarea`**: Crea una nueva tarea asignada a empleados y equipos de trabajo.
+12. **`AsignarEmpleadosATarea`**: Asigna empleados específicos a una tarea, como una actividad de producción o mantenimiento.
+13. **`AjustarSalarioAnualEmpleados`**: Actualiza automáticamente el salario de todos los empleados anualmente.
+14. **`RecalcularRendimientoPromedioCultivos`**: Calcula el rendimiento promedio de los cultivos y actualiza los datos.
+15. **`RegistrarVentaProducto`**: Registra una venta de productos agrícolas, actualizando el inventario de productos vendidos.
+16. **`ActualizarStockInsumoCompra`**: Actualiza automáticamente el stock de insumos al registrar una nueva compra.
+17. **`RegistrarHistorialComprasProveedores`**: Registra las compras realizadas a un proveedor en una tabla de historial.
+18. **`GenerarReporteGastosEmpleadosTrimestral`**: Genera un reporte de todos los gastos asociados a salarios y bonificaciones de los empleados de la finca.
+19. **`RegistrarCambioUbicacionCliente`**: Inserta un cambio de ubicación en el registro de un cliente.
+20. **`ActualizarCapacidadLocacionesSemanal`**: Ajusta semanalmente la capacidad disponible en las locaciones de almacenamiento.
+
+**Ejemplo 1: `ProcesarVenta`**
+```sql
+CALL ProcesarVenta('2024-10-21', 1, 1, 2500.00, '[{"id_producto": 1, "cantidad": 10}]');
+```
+
+**Ejemplo 2: `RegistrarProveedor`**
+```sql
+CALL RegistrarProveedor('Proveedor A', '555-1234', 'proveedora@example.com', 1);
+```
+
+---
+
+## Funciones
+
+Las funciones en este proyecto permiten realizar cálculos y transformaciones personalizadas sobre los datos, devolviendo resultados útiles en consultas SQL.
+
+### Descripción de Funciones:
+1. **`RendimientoPromedioHectarea`**: Calcula el rendimiento promedio de un cultivo por hectárea.
+2. **`CostoOperativoTotal`**: Calcula el costo operativo total de la finca en un rango de fechas.
+3. **`TotalProductosVendidosCliente`**: Calcula el número total de productos vendidos a un cliente específico.
+4. **`IngresoTotalPorCliente`**: Devuelve el total de ingresos generados por un cliente específico.
+5. **`CantidadInsumoDisponible`**: Muestra la cantidad total disponible de un insumo en el inventario.
+6. **`TotalComprasProveedor`**: Devuelve el total de compras realizadas a un proveedor en un periodo de tiempo.
+7. **`CostoPromedioInsumosProveedor`**: Calcula el costo promedio de insumos comprados a un proveedor.
+8. **`CostoProduccionAnimales`**: Devuelve el costo total de producción relacionada con animales.
+9. **`EmpleadosAsignadosATarea`**: Devuelve el número de empleados asignados a una tarea específica.
+10. **`CostoTotalActivosEnTarea`**: Calcula el costo total de los activos utilizados en una tarea.
+11. **`EficienciaProduccionAnimal`**: Calcula la cantidad producida por animal en una producción específica.
+12. **`PorcentajeStockDisponible`**: Devuelve el porcentaje de stock disponible de un producto específico.
+13. **`TiempoPromedioCultivo`**: Calcula el tiempo promedio de un cultivo desde la siembra hasta la cosecha.
+14. **`CostoTotalTarea`**: Calcula el costo total de una tarea agrícola o de producción.
+15. **`CostoTotalProduccionCultivo`**: Calcula el costo total de producción de un cultivo específico.
+16. **`RendimientoTotalAnimalesProduccion`**: Devuelve la cantidad total producida por animales en una producción.
+17. **`CostoOperativoPorHectareaCultivo`**: Calcula el costo operativo por hectárea de un cultivo.
+18. **`GananciaTotalProduccion`**: Calcula la ganancia generada por una producción.
+19. **`CostoInsumosPorHectareaCultivo`**: Calcula el costo total de insumos por hectárea de cultivo.
+20. **`DuracionPromedioTareas`**: Devuelve la duración promedio de las tareas de la finca.
+
+**Ejemplo 1: `RendimientoPromedioHectarea`**
+```sql
+SELECT RendimientoPromedioHectarea(1);
+```
+
+**Ejemplo 2: `CostoOperativoTotal`**
+```sql
+SELECT CostoOperativoTotal('2024-01-01', '2024-12-31');
+```
+
+---
+
+## Triggers
+
+Los triggers son mecanismos que responden automáticamente a eventos en la base de datos, como la inserción, eliminación o actualización de registros.
+
+### Descripción de Triggers:
+1. **`ActualizarInventarioVenta`**: Reduce el inventario de productos cuando se realiza una venta.
+2. **`RegistrarCambioSalario`**: Registra en un historial los cambios de salario de los empleados.
+3. **`VerificarStockAntesVenta`**: Verifica que haya suficiente stock disponible antes de registrar una venta.
+4. **`ActualizarCapacidadLocacion`**: Actualiza la capacidad disponible de una locación de almacenamiento después de insertar productos.
+5. **`RestaurarCapacidadLocacion`**: Restaura la capacidad de una locación de almacenamiento cuando se elimina un producto.
+6. **`RegistrarCambioPrecioProducto`**: Registra en un historial cualquier cambio en el precio de los productos.
+7. **`ActualizarStockInsumoCompra`**: Actualiza el inventario de insumos después de realizar una compra.
+8. **`RegistrarHistorialComprasProveedores`**: Registra la compra de insumos a un proveedor en un historial.
+9. **`VerificarVencimientoInsumos`**: Verifica si un insumo está vencido al actualizar su stock.
+10. **`ActualizarCantidadEmpleadosEnTarea`**: Actualiza el número de empleados asignados a una tarea cuando se agregan o eliminan empleados.
+11. **`BloquearEmpleadosMenoresDeEdad`**: Impide que se inserten empleados menores de 18 años.
+12. **`ActualizarEstadoCultivoDespuesSiembra`**: Actualiza el estado de un cultivo a "En crecimiento" cuando se siembra.
+13. **`PrevenirEliminarProductosConStock`**: Impide eliminar productos que aún tengan stock en inventario.
+14. **`VerificarDuplicidadProveedor`**: Evita la inserción de proveedores duplicados en la misma ubicación.
+15. **`ActualizarEstadoEquipoTrabajo`**: Cambia el estado de un equipo de trabajo a "En mantenimiento" si se asocia a una tarea de mantenimiento.
+16. **`RegistrarCambioUbicacionCliente`**: Guarda en un historial cualquier cambio de ubicación de un cliente.
+17. **`VerificarEmpleadosMinimosTareaCritica`**: Verifica que una tarea crítica tenga al menos dos empleados asignados.
+18. **`ActualizarEstadoVenta`**: Actualiza el estado de una venta a "Completada" después de registrar todos los detalles de venta.
+19. **`RegistrarHistorialTarea`**: Guarda el historial de cambios de estado de una tarea.
+20. **`VerificarDisponibilidadMaquina`**: Impide asignar una máquina a una tarea si no está disponible.
+
+**Ejemplo 1: `ActualizarInventarioVenta`**
+Cuando se inserta un nuevo detalle de venta, el inventario del producto se actualiza automáticamente.
+
+**Ejemplo 2: `RegistrarCambioSalario`**
+Cuando se actualiza el salario de un
+
+ empleado, el cambio se registra automáticamente en la tabla `Historial_salarios`.
+
+---
+
+## Eventos
+
+Los eventos son tareas programadas que se ejecutan de manera automática en horarios o intervalos específicos, facilitando la automatización de tareas de mantenimiento o reportes.
+
+### Descripción de Eventos:
+1. **`GenerarReporteMensualVentas`**: Genera automáticamente un reporte mensual con el total de ventas.
+2. **`GenerarReporteMensualProduccion`**: Crea un reporte mensual de la producción de la finca.
+3. **`AjustarSalarioAnualEmpleados`**: Aumenta el salario de todos los empleados en un 5% cada año.
+4. **`ActualizarInventarioProductosDiario`**: Revisa el inventario de productos al final de cada día, ajustando los valores negativos.
+5. **`LimpiarProductosAntiguosLocacion`**: Elimina productos que han estado almacenados por más de un año.
+6. **`RecalcularRendimientoPromedioCultivos`**: Calcula mensualmente el rendimiento promedio de los cultivos y lo actualiza.
+7. **`ActualizarEstadoMaquinariaSemanal`**: Actualiza el estado de las máquinas utilizadas en tareas de mantenimiento cada semana.
+8. **`AjustarStockInsumosMensual`**: Ajusta el inventario de insumos al final de cada mes, restando los consumos.
+9. **`ArchivarVentasAntiguasTrimestral`**: Mueve las ventas antiguas a una tabla de archivo cada tres meses.
+10. **`RecordatorioPagoProveedores`**: Envía recordatorios mensuales para pagos pendientes a proveedores.
+11. **`LimpiarDatosTemporalesInsumos`**: Elimina registros temporales de insumos cada semana.
+12. **`VerificarVencimientoInsumos`**: Actualiza el estado de los insumos que están próximos a vencer.
+13. **`GenerarReporteGastosEmpleadosTrimestral`**: Genera un reporte trimestral de los gastos en salarios y bonificaciones.
+14. **`ActualizarCapacidadLocacionesSemanal`**: Ajusta semanalmente la capacidad disponible en locaciones de almacenamiento.
+15. **`RecordatorioRenovacionContratos`**: Envía recordatorios mensuales para la renovación de contratos de empleados.
+16. **`GenerarReporteCostosOperativosMensual`**: Crea un reporte mensual de los costos operativos de la finca.
+17. **`VerificarStockBajo`**: Verifica diariamente si el stock de algún producto es bajo y genera alertas.
+18. **`LimpiarLogsAntiguos`**: Limpia los registros de logs antiguos cada tres meses.
+19. **`ActualizarEstadoTareasPendientes`**: Cambia el estado de las tareas pendientes que no se han completado en el plazo establecido.
+20. **`VerificarRendimientoEmpleados`**: Genera mensualmente un reporte del rendimiento de los empleados.
+
+**Ejemplo 1: `GenerarReporteMensualVentas`**
+Se ejecuta automáticamente al final de cada mes para generar un reporte de las ventas.
+
+**Ejemplo 2: `ActualizarCapacidadLocacionesSemanal`**
+Ajusta la capacidad disponible de las locaciones cada semana sin intervención manual.
 
 ## Roles de Usuario y Permisos
 
