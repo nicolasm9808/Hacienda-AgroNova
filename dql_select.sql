@@ -88,12 +88,10 @@ FROM Clientes c
 ORDER BY total_compras DESC 
 LIMIT 10;
 
--- 10. Ventas por mes
-SELECT mes, 
-       (SELECT SUM(v.total) 
-        FROM Ventas v 
-        WHERE DATE_FORMAT(v.fecha, '%Y-%m') = mes) AS total_ventas
-FROM (SELECT DISTINCT DATE_FORMAT(v.fecha, '%Y-%m') AS mes FROM Ventas v) AS meses;
+-- 10. Resumen de Ventas y Compras
+SELECT SUM(v.total) AS total_ventas, 
+(SELECT SUM(c.total) FROM Compras c) AS total_compras 
+FROM Ventas v;
 
 -- 11. Comparación entre costos de producción y ventas por mes
 SELECT p.mes, p.costo_produccion, v.total_ventas, (v.total_ventas - p.costo_produccion) AS ganancia
