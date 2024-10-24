@@ -411,7 +411,6 @@ INSERT INTO Productos_de_produccion (id, id_produccion, id_producto, cantidad) V
 (50, 25, 40, 1);
 
 -- Inserciones para la tabla Locaciones_almacenamiento
-
 INSERT INTO Locaciones_almacenamiento (id_locacion, nombre, capacidad_maxima, capacidad_disponible) VALUES
 (1, 'Almacén Principal', 5000, 3000),
 (2, 'Almacén Secundario', 3000, 2000),
@@ -527,9 +526,7 @@ INSERT INTO Tareas (id_tarea, descripcion_tarea, id_tipo_tarea, fecha, id_estado
 (47, 'Transporte de hierbas', 9, '2024-09-25', 2),
 (48, 'Fertilización de hierbas', 4, '2024-09-28', 1),
 (49, 'Control de plagas en hierbas', 7, '2024-09-30', 2),
-(50, 'Mantenimiento de cultivos de hierbas', 5, '2024-10-01', 1),
-(51, 'Siembra de guisantes', 1, '2024-09-10', 1),
-(52, 'Riego de guisantes', 3, '2024-09-15', 1);
+(50, 'Mantenimiento de cultivos de hierbas', 5, '2024-10-01', 1);
 
 -- Inserciones para la tabla Tareas_de_producción
 INSERT INTO Tareas_de_producción (id, id_producción, id_tarea) VALUES
@@ -709,7 +706,6 @@ INSERT INTO Vehiculos (id_vehiculo, id_activo, marca, modelo, id_tipo_vehiculo) 
 (9, 26, 'Nissan', 'Frontier', 1),
 (10, 27, 'Yamaha', 'XT660', 1);
 
-
 -- Inserciones en la tabla Unidades_medida
 INSERT INTO Unidades_medida (id_unidad_medida, unidad) VALUES
 (1, 'Kilogramos'),
@@ -759,12 +755,7 @@ INSERT INTO Equipos_de_trabajo (id_equipo, id_activo, descripcion, id_estado, ca
 (7, 35, 'Sierra de mano', 1, 5),
 (8, 36, 'Cinta métrica', 1, 30),
 (9, 37, 'Escalera de aluminio', 1, 2),
-(10, 38, 'Carro de mano', 1, 4),
-(11, 12, 'Cosechadora', 1, 3),
-(12, 13, 'Rotavator', 1, 5),
-(13, 14, 'Aspiradora de hojas', 1, 4),
-(14, 15, 'Pulverizador', 1, 2),
-(15, 16, 'Carretilla de mano', 1, 8);
+(10, 38, 'Carro de mano', 1, 4);
 
 -- Inserciones para la tabla Máquinas
 INSERT INTO Maquinas (id_maquina, id_activo, descripcion, marca, modelo, id_estado) VALUES
@@ -772,11 +763,11 @@ INSERT INTO Maquinas (id_maquina, id_activo, descripcion, marca, modelo, id_esta
 (2, 19, 'Cultivadora de tierras', 'John Deere', 'Cultivadora', 1),
 (3, 20, 'Desmalezadora', 'Stihl', 'Desmalezadora', 1),
 (4, 39, 'Pulverizadora de insecticidas', 'Baker', 'Pulverizadora', 1),
-(5, 40, 'Fumigadora de cultivos', 'Gilmour', 'Fumigadora', 1),
+(5, 40, 'Fumigadora de cultivos', 'Gilmour', 'Fumigadora', 3),
 (6, 41, 'Arado de 3 puntos', 'Massey Ferguson', 'Arado', 1),
 (7, 42, 'Cosechadora de arroz', 'New Holland', 'Cosechadora', 1),
 (8, 43, 'Moledora de granos', 'Wiley', 'Moledora', 1),
-(9, 22, 'Tractor de Cosecha', 'Claas', 'Cosechadora', 1),
+(9, 22, 'Tractor de Cosecha', 'Claas', 'Cosechadora', 3),
 (10, 44, 'Tractor Kubota', 'Kubota', 'M62', 1);
 
 -- Inserciones para la tabla Departamentos
@@ -1028,7 +1019,6 @@ INSERT INTO Proveedores (id_proveedor, nombre, telefono, correo, id_ubicacion) V
 (48, 'Productos de Huerta', '3489012345', 'ventas@productosdehuerta.com', 48),
 (49, 'Asesoría Agrícola', '3490123456', 'info@asesoriaagricola.com', 49),
 (50, 'Cultivos Ecológicos', '3501234567', 'ventas@cultivosecologicos.com', 50);
-
 
 INSERT INTO Compras (id_compra, fecha, total, id_proveedor) VALUES
 (1, '2024-01-10', 1500000.00, 1),
